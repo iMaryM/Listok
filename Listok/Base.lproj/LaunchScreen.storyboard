@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,18 +22,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vector 1 1" translatesAutoresizingMaskIntoConstraints="NO" id="itS-F6-oPN">
-                                <rect key="frame" x="32" y="273" width="350" height="350"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="itS-F6-oPN" secondAttribute="height" multiplier="1:1" id="VZe-DV-TSt"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vector 1 1" translatesAutoresizingMaskIntoConstraints="NO" id="itS-F6-oPN">
+                                <rect key="frame" x="64" y="154" width="286" height="294"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 5" translatesAutoresizingMaskIntoConstraints="NO" id="OvN-8A-svT">
-                                <rect key="frame" x="157.5" y="655" width="99" height="38"/>
+                                <rect key="frame" x="157.5" y="496" width="99" height="38"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plan what you will do to be more organized for today, tomorrow and beyond" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bk-Kq-vOA">
-                                <rect key="frame" x="32" y="705" width="350" height="37.5"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plan what you will do to be more organized for  today, tomorrow and beyond" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4bk-Kq-vOA">
+                                <rect key="frame" x="48" y="558" width="318" height="35.5"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                 <color key="textColor" red="0.17254901960784313" green="0.25098039215686274" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -40,15 +38,14 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4bk-Kq-vOA" firstAttribute="top" secondItem="OvN-8A-svT" secondAttribute="bottom" constant="12" id="5nA-07-fGq"/>
-                            <constraint firstItem="itS-F6-oPN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6hE-T8-EAH"/>
-                            <constraint firstItem="OvN-8A-svT" firstAttribute="top" secondItem="itS-F6-oPN" secondAttribute="bottom" constant="32" id="HYb-hX-LMI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4bk-Kq-vOA" secondAttribute="trailing" constant="32" id="KsX-Vw-gWG"/>
-                            <constraint firstItem="itS-F6-oPN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="Umz-g1-sQt"/>
-                            <constraint firstItem="itS-F6-oPN" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Va6-L8-qAC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="itS-F6-oPN" secondAttribute="trailing" constant="32" id="YyY-OA-k5Y"/>
+                            <constraint firstItem="4bk-Kq-vOA" firstAttribute="top" secondItem="OvN-8A-svT" secondAttribute="bottom" constant="24" id="5nA-07-fGq"/>
+                            <constraint firstItem="OvN-8A-svT" firstAttribute="top" secondItem="itS-F6-oPN" secondAttribute="bottom" constant="48" id="HYb-hX-LMI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4bk-Kq-vOA" secondAttribute="trailing" constant="48" id="KsX-Vw-gWG"/>
+                            <constraint firstItem="itS-F6-oPN" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="N7W-3Z-vLm"/>
+                            <constraint firstItem="itS-F6-oPN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="64" id="Umz-g1-sQt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="itS-F6-oPN" secondAttribute="trailing" constant="64" id="YyY-OA-k5Y"/>
                             <constraint firstItem="OvN-8A-svT" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="m0e-kk-kkI"/>
-                            <constraint firstItem="4bk-Kq-vOA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="wgo-yy-WaK"/>
+                            <constraint firstItem="4bk-Kq-vOA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="wgo-yy-WaK"/>
                         </constraints>
                     </view>
                 </viewController>
