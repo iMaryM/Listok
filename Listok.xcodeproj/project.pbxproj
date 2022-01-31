@@ -13,7 +13,7 @@
 		8413A45727A59E0E00520CA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8413A45527A59E0E00520CA4 /* Main.storyboard */; };
 		8413A45927A59E0F00520CA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8413A45827A59E0F00520CA4 /* Assets.xcassets */; };
 		8413A45C27A59E0F00520CA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8413A45A27A59E0F00520CA4 /* LaunchScreen.storyboard */; };
-		8469CC6A27A7C47900F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC6927A7C47900F3CA54 /* Roboto-Regular.ttf */; };
+		8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		8413A45827A59E0F00520CA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8413A45B27A59E0F00520CA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8413A45D27A59E0F00520CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8469CC6927A7C47900F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../Listok icons/Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 		8469CC6827A7C45F00F3CA54 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				8469CC6927A7C47900F3CA54 /* Roboto-Regular.ttf */,
+				8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -138,7 +138,7 @@
 			files = (
 				8413A45C27A59E0F00520CA4 /* LaunchScreen.storyboard in Resources */,
 				8413A45927A59E0F00520CA4 /* Assets.xcassets in Resources */,
-				8469CC6A27A7C47900F3CA54 /* Roboto-Regular.ttf in Resources */,
+				8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */,
 				8413A45727A59E0E00520CA4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +308,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,6 +336,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
