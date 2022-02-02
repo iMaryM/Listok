@@ -17,6 +17,7 @@
 		84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310EDA27A8467800E972E4 /* SignUpViewController.swift */; };
 		8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */; };
 		84F4BA7127AADB51009A58A5 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */; };
+		84F4BA7427AAFB74009A58A5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F4BA7327AAFB74009A58A5 /* ForgotPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		84310EDA27A8467800E972E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		84F4BA7327AAFB74009A58A5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		8413A44E27A59E0E00520CA4 /* Listok */ = {
 			isa = PBXGroup;
 			children = (
+				84F4BA7227AAFB55009A58A5 /* ForgotPassword */,
 				8407FB6327A86DA5007CF632 /* SignUp */,
 				8407FB6227A86D96007CF632 /* Login */,
 				8421A34227A86BA1006ED768 /* Splash */,
@@ -109,6 +112,14 @@
 				8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		84F4BA7227AAFB55009A58A5 /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				84F4BA7327AAFB74009A58A5 /* ForgotPasswordViewController.swift */,
+			);
+			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +197,7 @@
 			files = (
 				84310ED927A8464400E972E4 /* LoginViewController.swift in Sources */,
 				8413A45427A59E0E00520CA4 /* SplashViewController.swift in Sources */,
+				84F4BA7427AAFB74009A58A5 /* ForgotPasswordViewController.swift in Sources */,
 				8413A45027A59E0E00520CA4 /* AppDelegate.swift in Sources */,
 				8413A45227A59E0E00520CA4 /* SceneDelegate.swift in Sources */,
 				84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */,

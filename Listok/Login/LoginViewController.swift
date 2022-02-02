@@ -9,6 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    //MARK: - property
     private lazy var loginLabel = createLoginLabel()
     private lazy var loginIcon = createLoginIcon()
     private lazy var loginTextfield = createLoginTextfield()
@@ -21,13 +22,33 @@ class LoginViewController: UIViewController {
     private lazy var loginButton = createLoginButton()
     private lazy var signUpButton = createSignUp()
     
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareUI()
     }
+    
+    //MARK: - actions
+    @objc
+    private func goToForgotPasswordViewCOntroller() {
+        let vc = ForgotPasswordViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc
+    private func goToSignUpViewCOntroller() {
+        let vc = SignUpViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc
+    private func goToTaskViewController() {
+    }
+    
 }
 
+//MARK: - prepare UI
 private extension LoginViewController {
     
     func prepareUI() {
@@ -132,6 +153,7 @@ private extension LoginViewController {
             .foregroundColor : UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
         ]
         button.setAttributedTitle(NSMutableAttributedString(string: "Forgot Password?", attributes: attrs), for: .normal)
+        button.addTarget(self, action: #selector(goToForgotPasswordViewCOntroller), for: .touchUpInside)
         return button
     }
     
@@ -145,6 +167,7 @@ private extension LoginViewController {
         button.setAttributedTitle(NSMutableAttributedString(string: "Login", attributes: attrs), for: .normal)
         button.backgroundColor = UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
         button.layer.cornerRadius = 12
+        button.addTarget(self, action: #selector(goToTaskViewController), for: .touchUpInside)
         return button
     }
     
@@ -156,6 +179,7 @@ private extension LoginViewController {
             .foregroundColor : UIColor(red: 44 / 255, green: 64 / 255, blue: 110 / 255, alpha: 0.7)
         ]
         button.setAttributedTitle(NSMutableAttributedString(string: "Don’t have an account? Sign Up", attributes: attrs), for: .normal)
+        button.addTarget(self, action: #selector(goToSignUpViewCOntroller), for: .touchUpInside)
         return button
     }
     
