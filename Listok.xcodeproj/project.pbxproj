@@ -16,6 +16,7 @@
 		84310ED927A8464400E972E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310ED827A8464400E972E4 /* LoginViewController.swift */; };
 		84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310EDA27A8467800E972E4 /* SignUpViewController.swift */; };
 		8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */; };
+		84F4BA7127AADB51009A58A5 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		84310ED827A8464400E972E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84310EDA27A8467800E972E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		8469CC6827A7C45F00F3CA54 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */,
 				8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
@@ -168,6 +171,7 @@
 			files = (
 				8413A45C27A59E0F00520CA4 /* LaunchScreen.storyboard in Resources */,
 				8413A45927A59E0F00520CA4 /* Assets.xcassets in Resources */,
+				84F4BA7127AADB51009A58A5 /* Roboto-Bold.ttf in Resources */,
 				8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */,
 				8413A45727A59E0E00520CA4 /* Main.storyboard in Resources */,
 			);
