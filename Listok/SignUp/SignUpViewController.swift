@@ -170,14 +170,14 @@ extension SignUpViewController {
     
     func pinSignUpLabel() {
         NSLayoutConstraint.activate([
-            signUpLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
+            signUpLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 104),
             signUpLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
         ])
     }
     
     func pinLoginIcon() {
         NSLayoutConstraint.activate([
-            loginIcon.topAnchor.constraint(equalTo: signUpLabel.topAnchor, constant: 120),
+            loginIcon.topAnchor.constraint(equalTo: signUpLabel.topAnchor, constant: 80),
             loginIcon.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
         ])
     }

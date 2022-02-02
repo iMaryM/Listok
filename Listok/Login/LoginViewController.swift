@@ -185,14 +185,14 @@ private extension LoginViewController {
     
     func pinLoginLabel() {
         NSLayoutConstraint.activate([
-            loginLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
+            loginLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 104),
             loginLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
         ])
     }
     
     func pinLoginIcon() {
         NSLayoutConstraint.activate([
-            loginIcon.topAnchor.constraint(equalTo: loginLabel.topAnchor, constant: 120),
+            loginIcon.topAnchor.constraint(equalTo: loginLabel.topAnchor, constant: 80),
             loginIcon.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
         ])
     }
