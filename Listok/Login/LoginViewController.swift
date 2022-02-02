@@ -153,7 +153,7 @@ private extension LoginViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         let attrs: [NSAttributedString.Key : Any] = [
             .font : UIFont(name: "Roboto-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
-            .foregroundColor : UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
+            .foregroundColor : UIColor(red: 44 / 255, green: 64 / 255, blue: 110 / 255, alpha: 0.7)
         ]
         button.setAttributedTitle(NSMutableAttributedString(string: "Don’t have an account? Sign Up", attributes: attrs), for: .normal)
         return button
