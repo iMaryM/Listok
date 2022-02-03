@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SignUpViewController: UIViewController {
 
@@ -40,6 +41,49 @@ class SignUpViewController: UIViewController {
     
     @objc
     private func createProfile() {
+        
+        guard let email = emailTextfield.text,
+              let password = passwordTextfield.text else {
+                  return
+              }
+        
+//        FireBaseAuthManager.shared.authentication(with: email, and: password)
+        
+        //если создали аккаунт успешно то логинимся и переходим на экрна таск
+        //если свалилась ошибка, то показать алерт с ошибкой
+        
+        //некрасиво, надо сделать красиво через менеджер. Но не придумала как(
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                print("error = \(error.localizedDescription)")
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                if let result = authResult {
+                    print("UserID = \(result.user.uid)")
+                    
+                    Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                      guard let strongSelf = self else { return }
+                        if let error = error {
+                            print("error = \(error.localizedDescription)")
+                            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                            alert.addAction(action)
+                            strongSelf.present(alert, animated: true, completion: nil)
+                        } else {
+                            if let result = authResult {
+                                print("UserID = \(result.user.uid)")
+                                
+                                let vc = TaskViewController()
+                                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
 }
