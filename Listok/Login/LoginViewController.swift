@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -22,6 +21,8 @@ class LoginViewController: UIViewController {
     private lazy var forgotPasswordButton = createForgotPasswordButton()
     private lazy var loginButton = createLoginButton()
     private lazy var signUpButton = createSignUp()
+    
+    private let authManager = FireBaseAuthManager.shared
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -51,21 +52,16 @@ class LoginViewController: UIViewController {
                   return
               }
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-          guard let strongSelf = self else { return }
-            if let error = error {
-                print("error = \(error.localizedDescription)")
+        authManager.signIn(email: email, password: password) { [weak self] result in
+            switch result {
+            case .success:
+                let vc = TaskViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            case .failure(let error):
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 alert.addAction(action)
-                strongSelf.present(alert, animated: true, completion: nil)
-            } else {
-                if let result = authResult {
-                    print("UserID = \(result.user.uid)")
-                    
-                    let vc = TaskViewController()
-                    strongSelf.navigationController?.pushViewController(vc, animated: true)
-                }
+                self?.present(alert, animated: true, completion: nil)
             }
         }
     }

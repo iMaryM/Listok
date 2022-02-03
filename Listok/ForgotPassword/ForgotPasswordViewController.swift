@@ -15,16 +15,17 @@ class ForgotPasswordViewController: UIViewController {
     private lazy var emailIcon = createEmailIcon()
     private lazy var emailTextfield = createEmailTextfield()
     private lazy var separateLineEmail = cresteSeparateLine()
-
     private lazy var sendButton = createSendButton()
-    
     private lazy var loginButton = createLoginButton()
+    
+    private let authManager = FireBaseAuthManager.shared
     
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareUI()
+        
     }
     
     //MARK: - actions
@@ -36,6 +37,27 @@ class ForgotPasswordViewController: UIViewController {
     
     @objc
     private func sendPassword() {
+        guard let email = emailTextfield.text else {
+            return
+        }
+        
+        authManager.sendPasswordReset(withEmail: email) { result in
+            switch result {
+            case .success(let result):
+                let alert = UIAlertController(title: "Success", message: result, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .cancel) { action in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            case .failure(let error):
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
     }
 
 }

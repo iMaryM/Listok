@@ -6,11 +6,12 @@
 //
 
 import UIKit
-import Firebase
 
 class TaskViewController: UIViewController {
 
     private lazy var logOutButton = createLogOutButton()
+    
+    private let authManager = FireBaseAuthManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,13 +21,8 @@ class TaskViewController: UIViewController {
     
     @objc
     private func logOut() {
-        let firebaseAuth = Auth.auth()
-        
-        do {
-            try firebaseAuth.signOut()
+        authManager.logOut {
             self.navigationController?.popToRootViewController(animated: true)
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
         }
     }
 
