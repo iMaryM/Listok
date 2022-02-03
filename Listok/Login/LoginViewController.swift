@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -44,6 +45,29 @@ class LoginViewController: UIViewController {
     
     @objc
     private func goToTaskViewController() {
+        
+        guard let email = loginTextfield.text,
+              let password = passwordTextfield.text else {
+                  return
+              }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+          guard let strongSelf = self else { return }
+            if let error = error {
+                print("error = \(error.localizedDescription)")
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(action)
+                strongSelf.present(alert, animated: true, completion: nil)
+            } else {
+                if let result = authResult {
+                    print("UserID = \(result.user.uid)")
+                    
+                    let vc = TaskViewController()
+                    strongSelf.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
     }
     
 }
