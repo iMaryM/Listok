@@ -54,7 +54,7 @@ class LoginViewController: UIViewController {
         
         authManager.signIn(email: email, password: password) { [weak self] result in
             switch result {
-            case .success:
+            case .success():
                 let vc = TaskViewController()
                 self?.navigationController?.pushViewController(vc, animated: true)
             case .failure(let error):
@@ -123,6 +123,7 @@ private extension LoginViewController {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Email ID or Username"
+        textfield.text = "Pasha@gmail.com"
         return textfield
     }
     
@@ -146,6 +147,7 @@ private extension LoginViewController {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Password"
+        textfield.text = "123456789"
         return textfield
     }
     

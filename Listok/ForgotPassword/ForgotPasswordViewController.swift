@@ -43,8 +43,8 @@ class ForgotPasswordViewController: UIViewController {
         
         authManager.sendPasswordReset(withEmail: email) { result in
             switch result {
-            case .success(let result):
-                let alert = UIAlertController(title: "Success", message: result, preferredStyle: .alert)
+            case .success:
+                let alert = UIAlertController(title: "Success", message: "Reset password email has been successfully sent", preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .cancel) { action in
                     self.navigationController?.popViewController(animated: true)
                 }

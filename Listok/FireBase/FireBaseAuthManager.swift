@@ -24,13 +24,13 @@ class FireBaseAuthManager {
         }
     }
     
-    func signIn(email: String, password: String, closure: @escaping (Result<AuthDataResult, Error>) -> Void) {
+    func signIn(email: String, password: String, closure: @escaping (Result<Void, Error>) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 closure(.failure(error))
             } else {
-                if let result = authResult {
-                    closure(.success(result))
+                if let _ = authResult {
+                    closure(.success(()))
                 }
             }
         }
@@ -47,12 +47,12 @@ class FireBaseAuthManager {
         }
     }
     
-    func sendPasswordReset(withEmail email: String, closure: @escaping (Result<String, Error>) -> ()) {
+    func sendPasswordReset(withEmail email: String, closure: @escaping (Result<Void, Error>) -> ()) {
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let error = error {
                 closure(.failure(error))
             } else {
-                closure(.success("Reset password email has been successfully sent"))
+                closure(.success(()))
             }
         }
     }
