@@ -17,6 +17,9 @@
 		84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310EDA27A8467800E972E4 /* SignUpViewController.swift */; };
 		8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */; };
 		848E06D627B26A8000237CC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848E06D527B26A8000237CC2 /* GoogleService-Info.plist */; };
+		848E06DA27B28FB500237CC2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E06D827B28FB500237CC2 /* CalendarCollectionViewCell.swift */; };
+		848E06DB27B28FB500237CC2 /* CalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848E06D927B28FB500237CC2 /* CalendarCollectionViewCell.xib */; };
+		848E06DD27B2ECDC00237CC2 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848E06DC27B2ECDC00237CC2 /* Roboto-Medium.ttf */; };
 		84D7066527AC34B300D9B874 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */; };
 		84D7066A27AC4E3E00D9B874 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066927AC4E3E00D9B874 /* TaskViewController.swift */; };
 		84ED1F5F27AD52B9003D83B0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED1F5E27AD52B9003D83B0 /* ProfileViewController.swift */; };
@@ -41,6 +44,9 @@
 		84310EDA27A8467800E972E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		848E06D527B26A8000237CC2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		848E06D827B28FB500237CC2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		848E06D927B28FB500237CC2 /* CalendarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCollectionViewCell.xib; sourceTree = "<group>"; };
+		848E06DC27B2ECDC00237CC2 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
 		84D7066927AC4E3E00D9B874 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		84ED1F5E27AD52B9003D83B0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +114,7 @@
 		8413A44E27A59E0E00520CA4 /* Listok */ = {
 			isa = PBXGroup;
 			children = (
+				848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */,
 				848E06D527B26A8000237CC2 /* GoogleService-Info.plist */,
 				84ED1F6027AD58FA003D83B0 /* Models */,
 				84ED1F5D27AD52A4003D83B0 /* Profile */,
@@ -139,10 +146,20 @@
 		8469CC6827A7C45F00F3CA54 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				848E06DC27B2ECDC00237CC2 /* Roboto-Medium.ttf */,
 				84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */,
 				8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				848E06D827B28FB500237CC2 /* CalendarCollectionViewCell.swift */,
+				848E06D927B28FB500237CC2 /* CalendarCollectionViewCell.xib */,
+			);
+			path = CalendarCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		84D7066327AC349A00D9B874 /* FireBase */ = {
@@ -253,10 +270,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848E06DD27B2ECDC00237CC2 /* Roboto-Medium.ttf in Resources */,
 				8413A45C27A59E0F00520CA4 /* LaunchScreen.storyboard in Resources */,
 				8413A45927A59E0F00520CA4 /* Assets.xcassets in Resources */,
 				84F4BA7127AADB51009A58A5 /* Roboto-Bold.ttf in Resources */,
 				8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */,
+				848E06DB27B28FB500237CC2 /* CalendarCollectionViewCell.xib in Resources */,
 				8413A45727A59E0E00520CA4 /* Main.storyboard in Resources */,
 				848E06D627B26A8000237CC2 /* GoogleService-Info.plist in Resources */,
 			);
@@ -319,6 +338,7 @@
 				84D7066A27AC4E3E00D9B874 /* TaskViewController.swift in Sources */,
 				84ED1F5F27AD52B9003D83B0 /* ProfileViewController.swift in Sources */,
 				8413A45227A59E0E00520CA4 /* SceneDelegate.swift in Sources */,
+				848E06DA27B28FB500237CC2 /* CalendarCollectionViewCell.swift in Sources */,
 				84ED1F6227AD5915003D83B0 /* UserModel.swift in Sources */,
 				84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */,
 			);
