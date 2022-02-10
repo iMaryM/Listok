@@ -13,16 +13,22 @@ class TaskViewController: UIViewController {
     private lazy var dateLabel = createDateLabel()
     private lazy var calendarCollectionView = createcalendarCollectionView()
     
-    
     private var date = Date()
     private var dateFormatter = DateFormatter()
     
     private let authManager = FireBaseAuthManager.shared
     
+    private let calendar = Calendar.current
+    
+    private var arrayOfDates: [Date] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         prepareUI()
+        
+        arrayOfDates = getDates(from: date)
+        
     }
     
     @objc
@@ -116,6 +122,34 @@ private extension TaskViewController {
     }
 }
 
+private extension TaskViewController {
+    func getDates(from date: Date) -> [Date] {
+        var array: [Date] = []
+        
+        for i in 1...3 {
+            array.append(calendar.date(byAdding: .day, value: i, to: date)!)
+        }
+        
+        array.append(date)
+        
+        for i in 1...3 {
+            array.append(calendar.date(byAdding: .day, value: -i, to: date)!)
+        }
+        
+        return array.sorted()
+    }
+    
+    func convertDateToString(_ date: Date) -> (dayOfWeek: String, dayOfMonth: String) {
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.locale = Locale(identifier: "en")
+        dateFormatter1.dateFormat = "E"
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.locale = Locale(identifier: "en")
+        dateFormatter2.dateFormat = "d"
+        return (dateFormatter1.string(from: date), dateFormatter2.string(from: date))
+    }
+}
+
 extension TaskViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 7, height: collectionView.frame.height)
@@ -141,10 +175,13 @@ extension TaskViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.setUpCell(dayOfWeek: "MO", dayOfMonth: "21", isBackground: true)
+        if date == arrayOfDates[indexPath.row] {
+            cell.setUpCell(dayOfWeek: convertDateToString(arrayOfDates[indexPath.row]).dayOfWeek , dayOfMonth: convertDateToString(arrayOfDates[indexPath.row]).dayOfMonth, isBackground: true)
+        } else {
+            cell.setUpCell(dayOfWeek: convertDateToString(arrayOfDates[indexPath.row]).dayOfWeek , dayOfMonth: convertDateToString(arrayOfDates[indexPath.row]).dayOfMonth, isBackground: false)
+        }
         
         return cell
     }
-    
     
 }
