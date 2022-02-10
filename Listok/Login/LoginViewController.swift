@@ -24,9 +24,17 @@ class LoginViewController: UIViewController {
     
     private let authManager = FireBaseAuthManager.shared
     
+    private var emailText: String? = nil
+    private var passwordText: String? = nil
+    
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if checkSavedCredential() {
+            emailText = UserDefaults.standard.string(forKey: KeyesUserDefaults.email.rawValue)
+            passwordText = UserDefaults.standard.string(forKey: KeyesUserDefaults.password.rawValue)
+        }
         
         prepareUI()
     }
@@ -55,6 +63,15 @@ class LoginViewController: UIViewController {
         authManager.signIn(email: email, password: password) { [weak self] result in
             switch result {
             case .success():
+                
+                if (self?.checkSavedCredential())! {
+                    UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.email.rawValue)
+                    UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.password.rawValue)
+                }
+                
+                UserDefaults.standard.setValue(email, forKey: KeyesUserDefaults.email.rawValue)
+                UserDefaults.standard.setValue(password, forKey: KeyesUserDefaults.password.rawValue)
+                
                 let vc = TaskViewController()
                 self?.navigationController?.pushViewController(vc, animated: true)
             case .failure(let error):
@@ -123,7 +140,7 @@ private extension LoginViewController {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Email ID or Username"
-        textfield.text = "Pasha@gmail.com"
+        textfield.text = emailText
         return textfield
     }
     
@@ -147,7 +164,7 @@ private extension LoginViewController {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Password"
-        textfield.text = "123456789"
+        textfield.text = passwordText
         return textfield
     }
     
@@ -291,4 +308,10 @@ private extension LoginViewController {
         ])
     }
     
+}
+
+private extension LoginViewController {
+    func checkSavedCredential() -> Bool {
+        return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil) || (UserDefaults.standard.value(forKey: KeyesUserDefaults.password.rawValue) != nil))
+    }
 }

@@ -53,6 +53,16 @@ class SignUpViewController: UIViewController {
                 self?.authManager.signIn(email: email, password: password) { result in
                     switch result {
                     case .success:
+                        
+                        if (self?.checkSavedCredential())! {
+                            UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.email.rawValue)
+                            UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.password.rawValue)
+                        }
+                        
+                        UserDefaults.standard.setValue(email, forKey: KeyesUserDefaults.email.rawValue)
+                        UserDefaults.standard.setValue(password, forKey: KeyesUserDefaults.password.rawValue)
+                        
+                        
                         let vc = TaskViewController()
                         self?.navigationController?.pushViewController(vc, animated: true)
                     case .failure(let error):
@@ -289,5 +299,11 @@ extension SignUpViewController {
             loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+    }
+}
+
+private extension SignUpViewController {
+    func checkSavedCredential() -> Bool {
+        return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil) || (UserDefaults.standard.value(forKey: KeyesUserDefaults.password.rawValue) != nil))
     }
 }

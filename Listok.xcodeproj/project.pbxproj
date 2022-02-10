@@ -15,6 +15,7 @@
 		8413A45C27A59E0F00520CA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8413A45A27A59E0F00520CA4 /* LaunchScreen.storyboard */; };
 		84310ED927A8464400E972E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310ED827A8464400E972E4 /* LoginViewController.swift */; };
 		84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310EDA27A8467800E972E4 /* SignUpViewController.swift */; };
+		844BF43727B544FD004CEC6C /* KyesForUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */; };
 		8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */; };
 		848E06D627B26A8000237CC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848E06D527B26A8000237CC2 /* GoogleService-Info.plist */; };
 		848E06DA27B28FB500237CC2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E06D827B28FB500237CC2 /* CalendarCollectionViewCell.swift */; };
@@ -42,6 +43,7 @@
 		8413A45D27A59E0F00520CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84310ED827A8464400E972E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84310EDA27A8467800E972E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyesForUserDefaults.swift; sourceTree = "<group>"; };
 		8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		848E06D527B26A8000237CC2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		848E06D827B28FB500237CC2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				8413A45827A59E0F00520CA4 /* Assets.xcassets */,
 				8413A45A27A59E0F00520CA4 /* LaunchScreen.storyboard */,
 				8413A45D27A59E0F00520CA4 /* Info.plist */,
+				844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */,
 			);
 			path = Listok;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				8413A45227A59E0E00520CA4 /* SceneDelegate.swift in Sources */,
 				848E06DA27B28FB500237CC2 /* CalendarCollectionViewCell.swift in Sources */,
 				84ED1F6227AD5915003D83B0 /* UserModel.swift in Sources */,
+				844BF43727B544FD004CEC6C /* KyesForUserDefaults.swift in Sources */,
 				84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

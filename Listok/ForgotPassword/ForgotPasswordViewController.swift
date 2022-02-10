@@ -20,9 +20,15 @@ class ForgotPasswordViewController: UIViewController {
     
     private let authManager = FireBaseAuthManager.shared
     
+    private var emailText: String? = nil
+    
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if checkSavedCredential() {
+            emailText = UserDefaults.standard.string(forKey: KeyesUserDefaults.email.rawValue)
+        }
         
         prepareUI()
         
@@ -106,6 +112,7 @@ extension ForgotPasswordViewController {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Email ID"
+        textfield.text = emailText
         return textfield
     }
     
@@ -188,5 +195,11 @@ extension ForgotPasswordViewController {
             loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+    }
+}
+
+private extension ForgotPasswordViewController {
+    func checkSavedCredential() -> Bool {
+        return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil))
     }
 }
