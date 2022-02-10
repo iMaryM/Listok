@@ -23,6 +23,7 @@
 		848E06DD27B2ECDC00237CC2 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848E06DC27B2ECDC00237CC2 /* Roboto-Medium.ttf */; };
 		84D7066527AC34B300D9B874 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */; };
 		84D7066A27AC4E3E00D9B874 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066927AC4E3E00D9B874 /* TaskViewController.swift */; };
+		84DB37C427B5A6250028F6CA /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB37C327B5A6250028F6CA /* ContainerViewController.swift */; };
 		84ED1F5F27AD52B9003D83B0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED1F5E27AD52B9003D83B0 /* ProfileViewController.swift */; };
 		84ED1F6227AD5915003D83B0 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED1F6127AD5915003D83B0 /* UserModel.swift */; };
 		84F4BA7127AADB51009A58A5 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */; };
@@ -51,6 +52,7 @@
 		848E06DC27B2ECDC00237CC2 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
 		84D7066927AC4E3E00D9B874 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		84DB37C327B5A6250028F6CA /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		84ED1F5E27AD52B9003D83B0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		84ED1F6127AD5915003D83B0 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		8413A44E27A59E0E00520CA4 /* Listok */ = {
 			isa = PBXGroup;
 			children = (
+				84DB37C227B5A5FE0028F6CA /* ContainerViewController */,
 				848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */,
 				848E06D527B26A8000237CC2 /* GoogleService-Info.plist */,
 				84ED1F6027AD58FA003D83B0 /* Models */,
@@ -179,6 +182,14 @@
 				84D7066927AC4E3E00D9B874 /* TaskViewController.swift */,
 			);
 			path = Task;
+			sourceTree = "<group>";
+		};
+		84DB37C227B5A5FE0028F6CA /* ContainerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				84DB37C327B5A6250028F6CA /* ContainerViewController.swift */,
+			);
+			path = ContainerViewController;
 			sourceTree = "<group>";
 		};
 		84ED1F5D27AD52A4003D83B0 /* Profile */ = {
@@ -335,6 +346,7 @@
 			files = (
 				84310ED927A8464400E972E4 /* LoginViewController.swift in Sources */,
 				8413A45427A59E0E00520CA4 /* SplashViewController.swift in Sources */,
+				84DB37C427B5A6250028F6CA /* ContainerViewController.swift in Sources */,
 				84F4BA7427AAFB74009A58A5 /* ForgotPasswordViewController.swift in Sources */,
 				8413A45027A59E0E00520CA4 /* AppDelegate.swift in Sources */,
 				84D7066527AC34B300D9B874 /* FireBaseAuthManager.swift in Sources */,

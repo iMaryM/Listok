@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
                 UserDefaults.standard.setValue(email, forKey: KeyesUserDefaults.email.rawValue)
                 UserDefaults.standard.setValue(password, forKey: KeyesUserDefaults.password.rawValue)
                 
-                let vc = TaskViewController()
+                let vc = ContainerViewController()
                 self?.navigationController?.pushViewController(vc, animated: true)
             case .failure(let error):
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
