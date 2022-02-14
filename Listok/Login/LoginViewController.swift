@@ -22,12 +22,24 @@ class LoginViewController: UIViewController {
     private lazy var loginButton = createLoginButton()
     private lazy var signUpButton = createSignUp()
     
-    private let authManager = FireBaseAuthManager.shared
+    private let authManager: AuthServiceProtocol
+    private let router: LoginRouterProtocol
     
     private var emailText: String? = nil
     private var passwordText: String? = nil
     
     //MARK: - lifecycle
+    
+    init(authService: AuthServiceProtocol, router: LoginRouterProtocol) {
+        self.router = router
+        authManager = authService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

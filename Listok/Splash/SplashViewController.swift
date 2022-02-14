@@ -16,6 +16,8 @@ class SplashViewController: UIViewController {
     private lazy var buttonSignUp = createButtonSignUp()
     private lazy var buttonLogin = createButtonLogin()
     
+    private let router: SplashRouterProtocol = SplashRouter()
+    
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +28,12 @@ class SplashViewController: UIViewController {
     //MARK: - actions
     @objc
     private func buttonSignUpAction() {
-        let vc = SignUpViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        router.perform(to: .goToSignUp, viewController: self)
     }
     
     @objc
     private func buttonLoginAction() {
-        let vc = LoginViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        router.perform(to: .goToLogin, viewController: self)
     }
 }
 

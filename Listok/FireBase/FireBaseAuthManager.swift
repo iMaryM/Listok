@@ -7,7 +7,14 @@
 
 import FirebaseAuth
 
-class FireBaseAuthManager {
+protocol AuthServiceProtocol {
+    func createUser(email: String, password: String, closure: @escaping (Result<AuthDataResult, Error>) -> Void)
+    func signIn(email: String, password: String, closure: @escaping (Result<Void, Error>) -> Void)
+    func logOut(closure: () -> ())
+    func sendPasswordReset(withEmail email: String, closure: @escaping (Result<Void, Error>) -> ())
+}
+
+class FireBaseAuthManager: AuthServiceProtocol {
     public static let shared = FireBaseAuthManager()
     
     private init() {}

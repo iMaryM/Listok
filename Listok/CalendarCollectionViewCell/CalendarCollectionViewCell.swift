@@ -8,63 +8,74 @@
 import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {
+    
+    enum DateType {
+        case dayOfWeek
+        case dayOfMonth
+    }
 
     @IBOutlet weak var dayOfWeekLabel: UILabel!
     @IBOutlet weak var dayOfMonthLabel: UILabel!
     @IBOutlet weak var background: UIView!
+    
+    private let currentDate = Date()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func setUpCell(dayOfWeek: String, dayOfMonth: String, isBackground: Bool) {
+    func setUpCell(date: DateModel) {
         
-        let attrsWeeek: [NSAttributedString.Key : Any] = [
-            .font : UIFont(name: "Roboto-Medium", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor : UIColor(red: 16 / 255, green: 38 / 255, blue: 90 / 255, alpha: 1)
-        ]
-        let attributedStringWeek = NSMutableAttributedString(string: dayOfWeek, attributes: attrsWeeek)
-        dayOfWeekLabel.adjustsFontSizeToFitWidth = true
-        dayOfWeekLabel.minimumScaleFactor = 0.5
-        dayOfWeekLabel.attributedText = attributedStringWeek
-                 
-        let attrsMonth: [NSAttributedString.Key : Any] = [
-            .font : UIFont(name: "Roboto-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
-            .foregroundColor : UIColor(red: 16 / 255, green: 38 / 255, blue: 90 / 255, alpha: 1)
-        ]
-        let attributedStringMonth = NSMutableAttributedString(string: dayOfMonth, attributes: attrsMonth)
-        dayOfMonthLabel.adjustsFontSizeToFitWidth = true
-        dayOfMonthLabel.minimumScaleFactor = 0.5
-        dayOfMonthLabel.attributedText = attributedStringMonth
+        let isSelectedCell: Bool = currentDate.getCurrentDateString(format: "d") == date.dayOfMonth
         
-        background.isHidden = true
+        setupLabel(dayOfWeekLabel, isSelectedCell: isSelectedCell, date: date.dayOfWeek)
+        setupLabel(dayOfMonthLabel, isSelectedCell: isSelectedCell, date: date.dayOfMonth)
+    
+        background.isHidden = !isSelectedCell
         
-        if isBackground {
-            let attrsWeeek: [NSAttributedString.Key : Any] = [
-                .font : UIFont(name: "Roboto-Medium", size: 20) ?? UIFont.systemFont(ofSize: 20),
-                .foregroundColor : UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
-            ]
-            let attributedStringWeek = NSMutableAttributedString(string: dayOfWeek, attributes: attrsWeeek)
-            dayOfWeekLabel.adjustsFontSizeToFitWidth = true
-            dayOfWeekLabel.minimumScaleFactor = 0.5
-            dayOfWeekLabel.attributedText = attributedStringWeek
-            
-            let attrsMonth: [NSAttributedString.Key : Any] = [
-                .font : UIFont(name: "Roboto-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
-                .foregroundColor : UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.4)
-            ]
-            let attributedStringMonth = NSMutableAttributedString(string: dayOfMonth, attributes: attrsMonth)
-            dayOfMonthLabel.adjustsFontSizeToFitWidth = true
-            dayOfMonthLabel.minimumScaleFactor = 0.5
-            dayOfMonthLabel.attributedText = attributedStringMonth
-            
-            background.isHidden = false
+        if isSelectedCell {
             background.layer.cornerRadius = 12
             background.backgroundColor = UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
-            dayOfWeekLabel.textColor = .white
-            dayOfMonthLabel.textColor = .white
         }
     }
+}
 
+private extension CalendarCollectionViewCell {
+    
+    func setupLabel(_ label: UILabel, isSelectedCell: Bool, date: String) {
+        let attrs: [NSAttributedString.Key : Any] = [
+            .font : FormattedString.mediumText(isSelected: isSelectedCell).font,
+            .foregroundColor : FormattedString.mediumText(isSelected: isSelectedCell).fontColor
+        ]
+        
+        let attributedString = NSMutableAttributedString(string: date, attributes: attrs)
+        
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.attributedText = attributedString
+    }
+    
+    func convertDateToString(_ date: Date, type: DateType) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en")
+        
+        switch type {
+        case .dayOfWeek:
+            dateFormatter.dateFormat = "E"
+        case .dayOfMonth:
+            dateFormatter.dateFormat = "d"
+        }
+
+        return dateFormatter.string(from: date)
+    }
+
+}
+
+extension Date {
+    func getCurrentDateString(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
 }

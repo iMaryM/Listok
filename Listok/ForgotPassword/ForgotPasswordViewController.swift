@@ -37,7 +37,7 @@ class ForgotPasswordViewController: UIViewController {
     //MARK: - actions
     @objc
     private func goToLoginViewCOntroller() {
-        let vc = LoginViewController()
+        let vc = AuthFactory().create(by: .login)
         navigationController?.pushViewController(vc, animated: true)
     }
     

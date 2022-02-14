@@ -74,15 +74,15 @@ private extension ContainerViewController {
     }
     
     func createControlView() -> UIView {
-        let view_ = UIView()
-        view_.translatesAutoresizingMaskIntoConstraints = false
-        view_.backgroundColor = .white
-        view_.layer.cornerRadius = 16
-        view_.layer.shadowColor = UIColor.lightGray.cgColor
-        view_.layer.shadowOffset = CGSize(width: 8, height: 8)
-        view_.layer.shadowOpacity = 0.5
-        view_.layer.shadowRadius = 8
-        return view_
+        let viewControl = UIView()
+        viewControl.translatesAutoresizingMaskIntoConstraints = false
+        viewControl.backgroundColor = .white
+        viewControl.layer.cornerRadius = 16
+        viewControl.layer.shadowColor = UIColor.lightGray.cgColor
+        viewControl.layer.shadowOffset = CGSize(width: 8, height: 8)
+        viewControl.layer.shadowOpacity = 0.5
+        viewControl.layer.shadowRadius = 8
+        return viewControl
     }
     
     func createTaskButton() -> UIButton {
@@ -98,8 +98,8 @@ private extension ContainerViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("+", for: .normal)
         button.backgroundColor = UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
-        button.layer.cornerRadius = button.bounds.width / 2
-        button.clipsToBounds = true
+        button.layer.cornerRadius = 25
+        button.layer.masksToBounds = true
         return button
     }
     
@@ -116,7 +116,7 @@ private extension ContainerViewController {
             controlView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             controlView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 80),
             controlView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -80),
-            controlView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
+            controlView.heightAnchor.constraint(equalToConstant: 74)
         ])
     }
     
@@ -131,7 +131,7 @@ private extension ContainerViewController {
         NSLayoutConstraint.activate([
             addTaskButton.centerXAnchor.constraint(equalTo: controlView.centerXAnchor),
             addTaskButton.centerYAnchor.constraint(equalTo: controlView.centerYAnchor),
-            addTaskButton.heightAnchor.constraint(equalTo: controlView.heightAnchor, multiplier: 0.5),
+            addTaskButton.heightAnchor.constraint(equalToConstant: 50),
             addTaskButton.widthAnchor.constraint(equalTo: addTaskButton.heightAnchor)
         ])
     }
