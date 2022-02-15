@@ -133,18 +133,12 @@
 		8413A44E27A59E0E00520CA4 /* Listok */ = {
 			isa = PBXGroup;
 			children = (
+				848E310B27BBB3D300A08014 /* ViewControllers */,
+				848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */,
 				848E310827BBA03B00A08014 /* Extensions */,
 				848E30FF27B6B03100A08014 /* Factories */,
-				84DB37C227B5A5FE0028F6CA /* ContainerViewController */,
-				848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */,
 				84ED1F6027AD58FA003D83B0 /* Models */,
-				84ED1F5D27AD52A4003D83B0 /* Profile */,
-				84D7066827AC4E1800D9B874 /* Task */,
 				84D7066327AC349A00D9B874 /* FireBase */,
-				84F4BA7227AAFB55009A58A5 /* ForgotPassword */,
-				8407FB6327A86DA5007CF632 /* SignUp */,
-				8407FB6227A86D96007CF632 /* Login */,
-				8421A34227A86BA1006ED768 /* Splash */,
 				8469CC6827A7C45F00F3CA54 /* Fonts */,
 				8413A44F27A59E0E00520CA4 /* AppDelegate.swift */,
 				8413A45127A59E0E00520CA4 /* SceneDelegate.swift */,
@@ -201,6 +195,20 @@
 				848E310927BBA05F00A08014 /* Date+Format.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		848E310B27BBB3D300A08014 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8421A34227A86BA1006ED768 /* Splash */,
+				8407FB6327A86DA5007CF632 /* SignUp */,
+				8407FB6227A86D96007CF632 /* Login */,
+				84F4BA7227AAFB55009A58A5 /* ForgotPassword */,
+				84DB37C227B5A5FE0028F6CA /* ContainerViewController */,
+				84D7066827AC4E1800D9B874 /* Task */,
+				84ED1F5D27AD52A4003D83B0 /* Profile */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		84D7066327AC349A00D9B874 /* FireBase */ = {
