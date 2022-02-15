@@ -10,6 +10,9 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     //MARK: - property
+    lazy var avatarView = createAvatarView()
+    lazy var avatarImageView = createAvatarImageView()
+    lazy var usernameLabel = createUsernameLabel()
     lazy var emailLabel = createEmailLabel()
     private lazy var logOutButton = createLogOutButton()
     
@@ -25,9 +28,16 @@ class ProfileViewController: UIViewController {
     //MARK: - actions
     @objc
     private func logOut() {
-        authManager.logOut {
-            self.navigationController?.popViewController(animated: true)
+        let alert = UIAlertController(title: "Log Out", message: "Are you sure to log out from this account ?", preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let sureButton = UIAlertAction(title: "Sure", style: .default) { _ in
+            self.authManager.logOut {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
+        alert.addAction(cancelButton)
+        alert.addAction(sureButton)
+        present(alert, animated: true, completion: nil)
     }
 
 }
@@ -36,26 +46,66 @@ class ProfileViewController: UIViewController {
 private extension ProfileViewController {
     func prepareUI() {
         view.backgroundColor = .white
+        view.addSubview(avatarView)
+        view.addSubview(avatarImageView)
+        view.addSubview(usernameLabel)
         view.addSubview(emailLabel)
         view.addSubview(logOutButton)
-        pinLogOutButton()
+        pinAvatarView()
+        pinAvatarImageView()
+        pinUsernameLabel()
         pinEmailLabel()
+        pinLogOutButton()
     }
     
-    func createEmailLabel() -> UILabel {
+    func createAvatarView() -> UIView {
+        let viewAvatar = UIView()
+        viewAvatar.translatesAutoresizingMaskIntoConstraints = false
+        viewAvatar.backgroundColor = .white
+        viewAvatar.layer.cornerRadius = 40
+        viewAvatar.layer.shadowColor = UIColor.lightGray.cgColor
+        viewAvatar.layer.shadowOpacity = 0.5
+        viewAvatar.layer.shadowOffset = CGSize(width: 8, height: 8)
+        viewAvatar.layer.shadowRadius = 8
+        return viewAvatar
+    }
+    
+    func createAvatarImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "avatar")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }
+    
+    func createUsernameLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        let string = ""
+        let string = "username"
         let attrs: [NSAttributedString.Key : Any] = [
-            .font : UIFont(name: "Roboto-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
-            .foregroundColor : UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
+            .font : UIFont(name: "Roboto-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24),
+            .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
         ]
         let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
         label.attributedText = attributedString
         label.textAlignment = .center
         label.numberOfLines = 1
         return label
-        
+    }
+    
+    func createEmailLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let string = "email"
+        let attrs: [NSAttributedString.Key : Any] = [
+            .font : UIFont(name: "Roboto-Regular", size: 18) ?? UIFont.systemFont(ofSize: 18),
+            .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
+        ]
+        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        label.attributedText = attributedString
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        return label
     }
     
     func createLogOutButton() -> UIButton {
@@ -72,9 +122,33 @@ private extension ProfileViewController {
         return button
     }
     
+    func pinAvatarView() {
+        NSLayoutConstraint.activate([
+            avatarView.topAnchor.constraint(equalTo: view.topAnchor, constant: 112),
+            avatarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            avatarView.widthAnchor.constraint(equalToConstant: 80),
+            avatarView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+    
+    func pinAvatarImageView() {
+        NSLayoutConstraint.activate([
+            avatarImageView.centerXAnchor.constraint(equalTo: avatarView.centerXAnchor),
+            avatarImageView.centerYAnchor.constraint(equalTo: avatarView.centerYAnchor)
+        ])
+    }
+    
+    func pinUsernameLabel() {
+        NSLayoutConstraint.activate([
+            usernameLabel.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 24),
+            usernameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            usernameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40)
+        ])
+    }
+    
     func pinEmailLabel() {
         NSLayoutConstraint.activate([
-            emailLabel.bottomAnchor.constraint(equalTo: logOutButton.topAnchor, constant: -24),
+            emailLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 12),
             emailLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
             emailLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40)
         ])
@@ -82,8 +156,7 @@ private extension ProfileViewController {
     
     func pinLogOutButton() {
         NSLayoutConstraint.activate([
-            logOutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logOutButton.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 24),
             logOutButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
             logOutButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
             logOutButton.heightAnchor.constraint(equalToConstant: 56)
