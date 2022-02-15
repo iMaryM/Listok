@@ -31,12 +31,6 @@ class TaskModel {
     func getDates() -> [DateModel] {
         var arrayDates: [Date] = []
         var array: [DateModel] = []
-        let dateFormetter1 = DateFormatter()
-        dateFormetter1.locale = Locale(identifier: "en")
-        dateFormetter1.dateFormat = "E"
-        let dateFormetter2 = DateFormatter()
-        dateFormetter2.locale = Locale(identifier: "en")
-        dateFormetter2.dateFormat = "d"
         
         for i in 1...3 {
             arrayDates.append(calendar.date(byAdding: .day, value: i, to: date)!)
@@ -51,7 +45,7 @@ class TaskModel {
         let newArray = arrayDates.sorted()
         
         for date in newArray {
-            array.append(DateModel(dayOfWeek: dateFormetter1.string(from: date), dayOfMonth: dateFormetter2.string(from: date)))
+            array.append(DateModel(dayOfWeek: date.getFormettedDateString(format: "E"), dayOfMonth: date.getFormettedDateString(format: "d")))
         }
         
         return array

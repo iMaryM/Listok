@@ -137,7 +137,6 @@
 				848E30FF27B6B03100A08014 /* Factories */,
 				84DB37C227B5A5FE0028F6CA /* ContainerViewController */,
 				848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */,
-				848E06D527B26A8000237CC2 /* GoogleService-Info.plist */,
 				84ED1F6027AD58FA003D83B0 /* Models */,
 				84ED1F5D27AD52A4003D83B0 /* Profile */,
 				84D7066827AC4E1800D9B874 /* Task */,
@@ -152,6 +151,7 @@
 				8413A45827A59E0F00520CA4 /* Assets.xcassets */,
 				8413A45A27A59E0F00520CA4 /* LaunchScreen.storyboard */,
 				8413A45D27A59E0F00520CA4 /* Info.plist */,
+				848E06D527B26A8000237CC2 /* GoogleService-Info.plist */,
 				848E310627BAE24100A08014 /* FormattedString.swift */,
 				844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */,
 			);
