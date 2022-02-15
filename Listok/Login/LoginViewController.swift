@@ -28,8 +28,7 @@ class LoginViewController: UIViewController {
     private var emailText: String? = nil
     private var passwordText: String? = nil
     
-    //MARK: - lifecycle
-    
+    //MARK: - initializer
     init(authService: AuthServiceProtocol, router: LoginRouterProtocol) {
         self.router = router
         authManager = authService
@@ -40,6 +39,7 @@ class LoginViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -322,6 +322,7 @@ private extension LoginViewController {
     
 }
 
+//MARK: - check UserDefaults
 private extension LoginViewController {
     func checkSavedCredential() -> Bool {
         return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil) || (UserDefaults.standard.value(forKey: KeyesUserDefaults.password.rawValue) != nil))

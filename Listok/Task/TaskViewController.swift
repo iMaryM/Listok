@@ -9,6 +9,7 @@ import UIKit
 
 class TaskViewController: UIViewController {
 
+    //MARK: - property
     private lazy var taskLabel = createTaskLabel()
     private lazy var dateLabel = createDateLabel()
     private lazy var calendarCollectionView = createcalendarCollectionView()
@@ -16,6 +17,7 @@ class TaskViewController: UIViewController {
     private let taskModel = TaskModel()
     private var arrayOfDates = [DateModel]()
     
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +31,7 @@ class TaskViewController: UIViewController {
 
 }
 
+//MARK: - prepare UI
 private extension TaskViewController {
     
     func prepareUI() {
@@ -100,6 +103,7 @@ private extension TaskViewController {
     
 }
 
+//MARK: - setup CollectionView
 extension TaskViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 7, height: collectionView.frame.height)

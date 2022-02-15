@@ -9,29 +9,30 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    //MARK: - property
     lazy var emailLabel = createEmailLabel()
     private lazy var logOutButton = createLogOutButton()
     
     private let authManager = FireBaseAuthManager.shared
     
-    
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
  
         prepareUI()
     }
     
+    //MARK: - actions
     @objc
     private func logOut() {
         authManager.logOut {
-            
             self.navigationController?.popViewController(animated: true)
-
         }
     }
 
 }
 
+//MARK: - prepare UI
 private extension ProfileViewController {
     func prepareUI() {
         view.backgroundColor = .white

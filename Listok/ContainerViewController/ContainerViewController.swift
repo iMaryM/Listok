@@ -9,6 +9,7 @@ import UIKit
 
 class ContainerViewController: UIViewController {
 
+    //MARK: - property
     private lazy var controlView = createControlView()
     private lazy var taskButton = createTaskButton()
     private lazy var addTaskButton = createAddTaskButton()
@@ -17,6 +18,7 @@ class ContainerViewController: UIViewController {
     private var profileVC = ProfileViewController()
     private var taskVC = TaskViewController()
     
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +27,7 @@ class ContainerViewController: UIViewController {
         prepareUI()
     }
     
+    //MARK: - actions
     @objc
     private func moveToTaskViewController() {
         profileVC.view.isHidden = true
@@ -39,6 +42,7 @@ class ContainerViewController: UIViewController {
     
 }
 
+//MARK: - setup Container
 private extension ContainerViewController {
     
     func setUpContainerViewController() {
@@ -59,6 +63,7 @@ private extension ContainerViewController {
     
 }
 
+//MARK: - prepare UI
 private extension ContainerViewController {
     
     func prepareUI() {

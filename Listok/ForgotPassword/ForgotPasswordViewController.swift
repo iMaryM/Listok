@@ -68,6 +68,7 @@ class ForgotPasswordViewController: UIViewController {
 
 }
 
+//MARK: - prepare UI
 extension ForgotPasswordViewController {
     func prepareUI() {
         view.backgroundColor = .white
@@ -198,6 +199,7 @@ extension ForgotPasswordViewController {
     }
 }
 
+//MARK: - check UserDefaults
 private extension ForgotPasswordViewController {
     func checkSavedCredential() -> Bool {
         return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil))

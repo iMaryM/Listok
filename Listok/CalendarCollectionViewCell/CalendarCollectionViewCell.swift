@@ -8,26 +8,24 @@
 import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {
-    
-    enum DateType {
-        case dayOfWeek
-        case dayOfMonth
-    }
 
+    //MARK: - property
     @IBOutlet weak var dayOfWeekLabel: UILabel!
     @IBOutlet weak var dayOfMonthLabel: UILabel!
     @IBOutlet weak var background: UIView!
     
     private let currentDate = Date()
     
+    //MARK: - lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
+    //MARK: - setup Cell
     func setUpCell(date: DateModel) {
         
-        let isSelectedCell: Bool = currentDate.getCurrentDateString(format: "d") == date.dayOfMonth
+        let isSelectedCell: Bool = currentDate.getFormettedDateString(format: "d") == date.dayOfMonth
         
         setupLabel(dayOfWeekLabel, isSelectedCell: isSelectedCell, date: date.dayOfWeek)
         setupLabel(dayOfMonthLabel, isSelectedCell: isSelectedCell, date: date.dayOfMonth)
@@ -41,6 +39,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     }
 }
 
+//MARK: - setup UI
 private extension CalendarCollectionViewCell {
     
     func setupLabel(_ label: UILabel, isSelectedCell: Bool, date: String) {
@@ -56,26 +55,6 @@ private extension CalendarCollectionViewCell {
         label.attributedText = attributedString
     }
     
-    func convertDateToString(_ date: Date, type: DateType) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en")
-        
-        switch type {
-        case .dayOfWeek:
-            dateFormatter.dateFormat = "E"
-        case .dayOfMonth:
-            dateFormatter.dateFormat = "d"
-        }
-
-        return dateFormatter.string(from: date)
-    }
-
 }
 
-extension Date {
-    func getCurrentDateString(format: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: self)
-    }
-}
+

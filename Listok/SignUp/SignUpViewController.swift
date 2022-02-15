@@ -82,6 +82,7 @@ class SignUpViewController: UIViewController {
     }
 }
 
+//MARK: - prepare UI
 extension SignUpViewController {
     
     func prepareUI() {
@@ -302,6 +303,7 @@ extension SignUpViewController {
     }
 }
 
+//MARK: - check UserDefaults
 private extension SignUpViewController {
     func checkSavedCredential() -> Bool {
         return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil) || (UserDefaults.standard.value(forKey: KeyesUserDefaults.password.rawValue) != nil))
