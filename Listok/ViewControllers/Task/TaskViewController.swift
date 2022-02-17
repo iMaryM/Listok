@@ -13,6 +13,10 @@ class TaskViewController: UIViewController {
     private lazy var taskLabel = createTaskLabel()
     private lazy var dateLabel = createDateLabel()
     private lazy var calendarCollectionView = createcalendarCollectionView()
+    private lazy var todayLabel = createTodayLabel()
+    private lazy var withoutTaskImageView = createWithoutTaskImageView()
+    private lazy var withoutTaskLabel = createWithoutTaskLabel()
+    private lazy var taskTableView = createTaskTableView()
     
     private let taskModel = TaskModel()
     private var arrayOfDates = [DateModel]()
@@ -39,9 +43,17 @@ private extension TaskViewController {
         view.addSubview(taskLabel)
         view.addSubview(dateLabel)
         view.addSubview(calendarCollectionView)
+        view.addSubview(todayLabel)
+//        view.addSubview(taskTableView)
+        view.addSubview(withoutTaskImageView)
+        view.addSubview(withoutTaskLabel)
         pinTaskLabel()
         pinDateLabel()
         pinCalendarCollectionView()
+        pinTodayLabel()
+//        pinTaskTableView()
+        pinWithoutTaskImageView()
+        pinWithoutTaskLabel()
     }
     
     func createTaskLabel() -> UILabel {
@@ -49,7 +61,7 @@ private extension TaskViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         let string = "Task"
         let attrs: [NSAttributedString.Key : Any] = [
-            .font : UIFont(name: "Roboto-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24),
+            .font : UIFont(name: "Roboto-Bold", size: 28) ?? UIFont.systemFont(ofSize: 28),
             .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
         ]
         let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
@@ -78,26 +90,107 @@ private extension TaskViewController {
         return collectionView
     }
     
+    func createTodayLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let string = "Today"
+        let attrs: [NSAttributedString.Key : Any] = [
+            .font : UIFont(name: "Roboto-Medium", size: 24) ?? UIFont.systemFont(ofSize: 24),
+            .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
+        ]
+        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        label.attributedText = attributedString
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        return label
+    }
+    
+    func createWithoutTaskImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "withoutTask")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }
+    
+    func createWithoutTaskLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let string = "You don’t have any schedule today.\n Tap the plus button to create new to-do."
+        let attrs: [NSAttributedString.Key : Any] = [
+            .font : UIFont(name: "Roboto-Medium", size: 12) ?? UIFont.systemFont(ofSize: 12),
+            .foregroundColor : UIColor(red: 87 / 255, green: 87 / 254, blue: 87 / 255, alpha: 1)
+        ]
+        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        label.attributedText = attributedString
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    
+    func createTaskTableView() -> UITableView {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UINib(nibName: "TaskTableViewCell", bundle: nil), forCellReuseIdentifier: "TaskTableViewCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        return tableView
+    }
+    
     func pinTaskLabel() {
         NSLayoutConstraint.activate([
             taskLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
-            taskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 32)
+            taskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24)
         ])
     }
     
     func pinDateLabel() {
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
-            dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -32)
+            dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24)
         ])
     }
     
     func pinCalendarCollectionView() {
         NSLayoutConstraint.activate([
-            calendarCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 32),
-            calendarCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -32),
+            calendarCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            calendarCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
             calendarCollectionView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 32),
             calendarCollectionView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+    
+    func pinTodayLabel() {
+        NSLayoutConstraint.activate([
+            todayLabel.topAnchor.constraint(equalTo: calendarCollectionView.bottomAnchor, constant: 40),
+            todayLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24)
+        ])
+    }
+    
+    func pinWithoutTaskImageView() {
+        NSLayoutConstraint.activate([
+            withoutTaskImageView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 56),
+            withoutTaskImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            withoutTaskImageView.heightAnchor.constraint(equalToConstant: 200),
+            withoutTaskImageView.widthAnchor.constraint(equalToConstant: 200)
+        ])
+    }
+    
+    func pinWithoutTaskLabel() {
+        NSLayoutConstraint.activate([
+            withoutTaskLabel.topAnchor.constraint(equalTo: withoutTaskImageView.bottomAnchor, constant: 32),
+            withoutTaskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 64),
+            withoutTaskLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64)
+        ])
+    }
+    
+    func pinTaskTableView() {
+        NSLayoutConstraint.activate([
+            taskTableView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 32),
+            taskTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            taskTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
+            taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32)
         ])
     }
     
@@ -130,6 +223,49 @@ extension TaskViewController: UICollectionViewDataSource {
         }
         
         cell.setUpCell(date: arrayOfDates[indexPath.row])
+        
+        return cell
+    }
+    
+}
+
+//MARK: - setup TableView
+extension TaskViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}
+
+extension TaskViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell") as? TaskTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setupCell()
         
         return cell
     }

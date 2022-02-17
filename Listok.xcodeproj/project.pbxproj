@@ -18,6 +18,8 @@
 		8448524B27BD52AB0069C61C /* ForgotPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524A27BD52AB0069C61C /* ForgotPasswordRouter.swift */; };
 		8448524D27BD56190069C61C /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524C27BD56190069C61C /* ProfileRouter.swift */; };
 		8448524F27BE93F90069C61C /* ContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524E27BE93F90069C61C /* ContainerFactory.swift */; };
+		8448525327BEAFF50069C61C /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448525127BEAFF50069C61C /* TaskTableViewCell.swift */; };
+		8448525427BEAFF50069C61C /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8448525227BEAFF50069C61C /* TaskTableViewCell.xib */; };
 		844BF43727B544FD004CEC6C /* KyesForUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */; };
 		8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */; };
 		848E06D627B26A8000237CC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848E06D527B26A8000237CC2 /* GoogleService-Info.plist */; };
@@ -58,6 +60,8 @@
 		8448524A27BD52AB0069C61C /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
 		8448524C27BD56190069C61C /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		8448524E27BE93F90069C61C /* ContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerFactory.swift; sourceTree = "<group>"; };
+		8448525127BEAFF50069C61C /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		8448525227BEAFF50069C61C /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
 		844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyesForUserDefaults.swift; sourceTree = "<group>"; };
 		8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		848E06D527B26A8000237CC2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 		8413A44E27A59E0E00520CA4 /* Listok */ = {
 			isa = PBXGroup;
 			children = (
+				8448525027BEAFC90069C61C /* TaskTableViewCell */,
 				848E310B27BBB3D300A08014 /* ViewControllers */,
 				848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */,
 				848E310827BBA03B00A08014 /* Extensions */,
@@ -169,6 +174,15 @@
 				848E30FD27B6AB9600A08014 /* SplashRouter.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		8448525027BEAFC90069C61C /* TaskTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8448525127BEAFF50069C61C /* TaskTableViewCell.swift */,
+				8448525227BEAFF50069C61C /* TaskTableViewCell.xib */,
+			);
+			path = TaskTableViewCell;
 			sourceTree = "<group>";
 		};
 		8469CC6827A7C45F00F3CA54 /* Fonts */ = {
@@ -347,6 +361,7 @@
 				84F4BA7127AADB51009A58A5 /* Roboto-Bold.ttf in Resources */,
 				8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */,
 				848E06DB27B28FB500237CC2 /* CalendarCollectionViewCell.xib in Resources */,
+				8448525427BEAFF50069C61C /* TaskTableViewCell.xib in Resources */,
 				8413A45727A59E0E00520CA4 /* Main.storyboard in Resources */,
 				848E06D627B26A8000237CC2 /* GoogleService-Info.plist in Resources */,
 			);
@@ -418,6 +433,7 @@
 				848E30FC27B6927300A08014 /* TaskModel.swift in Sources */,
 				84D7066A27AC4E3E00D9B874 /* TaskViewController.swift in Sources */,
 				84ED1F5F27AD52B9003D83B0 /* ProfileViewController.swift in Sources */,
+				8448525327BEAFF50069C61C /* TaskTableViewCell.swift in Sources */,
 				8413A45227A59E0E00520CA4 /* SceneDelegate.swift in Sources */,
 				848E30FE27B6AB9600A08014 /* SplashRouter.swift in Sources */,
 				848E06DA27B28FB500237CC2 /* CalendarCollectionViewCell.swift in Sources */,
