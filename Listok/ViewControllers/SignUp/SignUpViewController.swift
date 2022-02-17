@@ -23,7 +23,19 @@ class SignUpViewController: UIViewController {
     private lazy var createButton = createCreateButton()
     private lazy var loginButton = createLoginButton()
     
-    private let authManager = FireBaseAuthManager.shared
+    private let authService: AuthServiceProtocol
+    private let router: SignUpRouterProtocol
+    
+    //MARK: - initializer
+    init(authService: AuthServiceProtocol, router: SignUpRouterProtocol) {
+        self.authService = authService
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -35,8 +47,7 @@ class SignUpViewController: UIViewController {
     //MARK: - actions
     @objc
     private func goToLoginViewCOntroller() {
-        let vc = AuthFactory().create(by: .login)
-        navigationController?.pushViewController(vc, animated: true)
+        router.perform(to: .goToLogin, viewController: self)
     }
     
     @objc
@@ -47,14 +58,20 @@ class SignUpViewController: UIViewController {
                   return
               }
         
-        authManager.createUser(email: email, password: password) { [weak self] result in
+        authService.createUser(email: email, password: password) { [weak self] result in
+            
+            guard let self = self else { return }
+            
             switch result {
             case .success:
-                self?.authManager.signIn(email: email, password: password) { result in
+                self.authService.signIn(email: email, password: password) { [weak self] result in
+                    
+                    guard let self = self else { return }
+                    
                     switch result {
                     case .success:
                         
-                        if (self?.checkSavedCredential())! {
+                        if (self.checkSavedCredential()) {
                             UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.email.rawValue)
                             UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.password.rawValue)
                         }
@@ -63,20 +80,19 @@ class SignUpViewController: UIViewController {
                         UserDefaults.standard.setValue(password, forKey: KeyesUserDefaults.password.rawValue)
                         
                         
-                        let vc = TaskViewController()
-                        self?.navigationController?.pushViewController(vc, animated: true)
+                        self.router.perform(to: .goToTask, viewController: self)
                     case .failure(let error):
                         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                         alert.addAction(action)
-                        self?.present(alert, animated: true, completion: nil)
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             case .failure(let error):
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 alert.addAction(action)
-                self?.present(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

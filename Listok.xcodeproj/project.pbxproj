@@ -15,6 +15,9 @@
 		8413A45C27A59E0F00520CA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8413A45A27A59E0F00520CA4 /* LaunchScreen.storyboard */; };
 		84310ED927A8464400E972E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310ED827A8464400E972E4 /* LoginViewController.swift */; };
 		84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310EDA27A8467800E972E4 /* SignUpViewController.swift */; };
+		8448524B27BD52AB0069C61C /* ForgotPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524A27BD52AB0069C61C /* ForgotPasswordRouter.swift */; };
+		8448524D27BD56190069C61C /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524C27BD56190069C61C /* ProfileRouter.swift */; };
+		8448524F27BE93F90069C61C /* ContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524E27BE93F90069C61C /* ContainerFactory.swift */; };
 		844BF43727B544FD004CEC6C /* KyesForUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */; };
 		8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */; };
 		848E06D627B26A8000237CC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848E06D527B26A8000237CC2 /* GoogleService-Info.plist */; };
@@ -28,6 +31,7 @@
 		848E310527BAE04100A08014 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E310427BAE04100A08014 /* DateModel.swift */; };
 		848E310727BAE24100A08014 /* FormattedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E310627BAE24100A08014 /* FormattedString.swift */; };
 		848E310A27BBA05F00A08014 /* Date+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E310927BBA05F00A08014 /* Date+Format.swift */; };
+		848E310D27BBC7AC00A08014 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E310C27BBC7AC00A08014 /* SignUpRouter.swift */; };
 		84D7066527AC34B300D9B874 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */; };
 		84D7066A27AC4E3E00D9B874 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066927AC4E3E00D9B874 /* TaskViewController.swift */; };
 		84DB37C427B5A6250028F6CA /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB37C327B5A6250028F6CA /* ContainerViewController.swift */; };
@@ -51,6 +55,9 @@
 		8413A45D27A59E0F00520CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84310ED827A8464400E972E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84310EDA27A8467800E972E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		8448524A27BD52AB0069C61C /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
+		8448524C27BD56190069C61C /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		8448524E27BE93F90069C61C /* ContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerFactory.swift; sourceTree = "<group>"; };
 		844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyesForUserDefaults.swift; sourceTree = "<group>"; };
 		8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		848E06D527B26A8000237CC2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -64,6 +71,7 @@
 		848E310427BAE04100A08014 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		848E310627BAE24100A08014 /* FormattedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedString.swift; sourceTree = "<group>"; };
 		848E310927BBA05F00A08014 /* Date+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Format.swift"; sourceTree = "<group>"; };
+		848E310C27BBC7AC00A08014 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
 		84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
 		84D7066927AC4E3E00D9B874 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		84DB37C327B5A6250028F6CA /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				84310EDA27A8467800E972E4 /* SignUpViewController.swift */,
+				848E310C27BBC7AC00A08014 /* SignUpRouter.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -185,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				848E310027B6B06400A08014 /* AuthFactory.swift */,
+				8448524E27BE93F90069C61C /* ContainerFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -240,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				84ED1F5E27AD52B9003D83B0 /* ProfileViewController.swift */,
+				8448524C27BD56190069C61C /* ProfileRouter.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -257,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				84F4BA7327AAFB74009A58A5 /* ForgotPasswordViewController.swift */,
+				8448524A27BD52AB0069C61C /* ForgotPasswordRouter.swift */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -393,11 +405,14 @@
 				8413A45427A59E0E00520CA4 /* SplashViewController.swift in Sources */,
 				84DB37C427B5A6250028F6CA /* ContainerViewController.swift in Sources */,
 				84F4BA7427AAFB74009A58A5 /* ForgotPasswordViewController.swift in Sources */,
+				8448524F27BE93F90069C61C /* ContainerFactory.swift in Sources */,
 				8413A45027A59E0E00520CA4 /* AppDelegate.swift in Sources */,
 				848E310527BAE04100A08014 /* DateModel.swift in Sources */,
 				848E310A27BBA05F00A08014 /* Date+Format.swift in Sources */,
 				84D7066527AC34B300D9B874 /* FireBaseAuthManager.swift in Sources */,
+				8448524D27BD56190069C61C /* ProfileRouter.swift in Sources */,
 				848E310327B6B9F800A08014 /* LoginRouter.swift in Sources */,
+				848E310D27BBC7AC00A08014 /* SignUpRouter.swift in Sources */,
 				848E310127B6B06400A08014 /* AuthFactory.swift in Sources */,
 				848E310727BAE24100A08014 /* FormattedString.swift in Sources */,
 				848E30FC27B6927300A08014 /* TaskModel.swift in Sources */,
@@ -406,6 +421,7 @@
 				8413A45227A59E0E00520CA4 /* SceneDelegate.swift in Sources */,
 				848E30FE27B6AB9600A08014 /* SplashRouter.swift in Sources */,
 				848E06DA27B28FB500237CC2 /* CalendarCollectionViewCell.swift in Sources */,
+				8448524B27BD52AB0069C61C /* ForgotPasswordRouter.swift in Sources */,
 				84ED1F6227AD5915003D83B0 /* UserModel.swift in Sources */,
 				844BF43727B544FD004CEC6C /* KyesForUserDefaults.swift in Sources */,
 				84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */,

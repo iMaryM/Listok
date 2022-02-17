@@ -18,9 +18,21 @@ class ForgotPasswordViewController: UIViewController {
     private lazy var sendButton = createSendButton()
     private lazy var loginButton = createLoginButton()
     
-    private let authManager = FireBaseAuthManager.shared
+    private let authService: AuthServiceProtocol
+    private let router: ForgotPasswordRouterProtocol
     
     private var emailText: String? = nil
+    
+    //MARK: - initializer
+    init(authService: AuthServiceProtocol, router: ForgotPasswordRouterProtocol) {
+        self.authService = authService
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -37,8 +49,7 @@ class ForgotPasswordViewController: UIViewController {
     //MARK: - actions
     @objc
     private func goToLoginViewCOntroller() {
-        let vc = AuthFactory().create(by: .login)
-        navigationController?.pushViewController(vc, animated: true)
+        router.perform(segue: .goToLogin, viewController: self)
     }
     
     @objc
@@ -47,7 +58,7 @@ class ForgotPasswordViewController: UIViewController {
             return
         }
         
-        authManager.sendPasswordReset(withEmail: email) { result in
+        authService.sendPasswordReset(withEmail: email) { result in
             switch result {
             case .success:
                 let alert = UIAlertController(title: "Success", message: "Reset password email has been successfully sent", preferredStyle: .alert)

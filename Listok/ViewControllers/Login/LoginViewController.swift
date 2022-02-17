@@ -54,14 +54,12 @@ class LoginViewController: UIViewController {
     //MARK: - actions
     @objc
     private func goToForgotPasswordViewCOntroller() {
-        let vc = ForgotPasswordViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        router.perform(to: .forgotPassword, viewController: self)
     }
     
     @objc
     private func goToSignUpViewCOntroller() {
-        let vc = SignUpViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        router.perform(to: .goToSignUp, viewController: self)
     }
     
     @objc
@@ -84,8 +82,7 @@ class LoginViewController: UIViewController {
                 UserDefaults.standard.setValue(email, forKey: KeyesUserDefaults.email.rawValue)
                 UserDefaults.standard.setValue(password, forKey: KeyesUserDefaults.password.rawValue)
                 
-                let vc = ContainerViewController()
-                self?.navigationController?.pushViewController(vc, animated: true)
+                self?.router.perform(to: .goToTask, viewController: self!)
             case .failure(let error):
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)

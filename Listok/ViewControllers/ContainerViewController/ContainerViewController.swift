@@ -15,8 +15,8 @@ class ContainerViewController: UIViewController {
     private lazy var addTaskButton = createAddTaskButton()
     private lazy var profileButton = createProfileButton()
     
-    private var profileVC = ProfileViewController()
-    private var taskVC = TaskViewController()
+    private var firstViewController = UIViewController()
+    private var secondViewController = UIViewController()
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -30,14 +30,19 @@ class ContainerViewController: UIViewController {
     //MARK: - actions
     @objc
     private func moveToTaskViewController() {
-        profileVC.view.isHidden = true
-        taskVC.view.isHidden = false
+        secondViewController.view.isHidden = true
+        firstViewController.view.isHidden = false
     }
 
     @objc
     private func moveToProfileViewController() {
-        profileVC.view.isHidden = false
-        taskVC.view.isHidden = true
+        secondViewController.view.isHidden = false
+        firstViewController.view.isHidden = true
+    }
+    
+    func setViewController(firstViewController: UIViewController, secondViewController: UIViewController) {
+        self.firstViewController = firstViewController
+        self.secondViewController = secondViewController
     }
     
 }
@@ -46,19 +51,19 @@ class ContainerViewController: UIViewController {
 private extension ContainerViewController {
     
     func setUpContainerViewController() {
-        addChild(taskVC)
-        addChild(profileVC)
+        addChild(firstViewController)
+        addChild(secondViewController)
         
-        self.view.addSubview(taskVC.view)
-        self.view.addSubview(profileVC.view)
+        self.view.addSubview(firstViewController.view)
+        self.view.addSubview(secondViewController.view)
         
-        taskVC.view.frame = self.view.bounds
-        profileVC.view.frame = self.view.bounds
+        firstViewController.view.frame = self.view.bounds
+        secondViewController.view.frame = self.view.bounds
         
-        profileVC.view.isHidden = true
+        secondViewController.view.isHidden = true
         
-        taskVC.didMove(toParent: self)
-        profileVC.didMove(toParent: self)
+        firstViewController.didMove(toParent: self)
+        secondViewController.didMove(toParent: self)
     }
     
 }

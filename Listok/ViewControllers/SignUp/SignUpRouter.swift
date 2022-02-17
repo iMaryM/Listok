@@ -1,29 +1,28 @@
 //
-//  LoginRouter.swift
+//  SignUpRouter.swift
 //  Listok
 //
-//  Created by Мария Манжос on 11.02.22.
+//  Created by Мария Манжос on 15.02.22.
 //
 
 import Foundation
 import UIKit
 
-enum LoginSegue {
-    case goToSignUp
+enum SignUpSegue {
     case goToTask
-    case forgotPassword
+    case goToLogin
 }
 
-protocol LoginRouterProtocol {
-    func perform(to segue: LoginSegue, viewController: UIViewController)
+protocol SignUpRouterProtocol {
+    func perform(to segue: SignUpSegue, viewController: UIViewController)
 }
 
-class LoginRouter: LoginRouterProtocol {
+class SignUpRouter: SignUpRouterProtocol {
 
-    func perform(to segue: LoginSegue, viewController: UIViewController) {
+    func perform(to segue: SignUpSegue, viewController: UIViewController) {
         switch segue {
-        case .goToSignUp:
-            let vc = AuthFactory().create(by: .signUp)
+        case .goToLogin:
+            let vc = AuthFactory().create(by: .login)
             viewController.navigationController?.pushViewController(vc, animated: true)
         case .goToTask:
             let authService = FireBaseAuthManager.shared
@@ -32,11 +31,7 @@ class LoginRouter: LoginRouterProtocol {
             let secondVC = ProfileViewController(authService: authService, router: router)
             let vc = ContainerFactory().create(firstViewController: firstVC, secondViewController: secondVC)
             viewController.navigationController?.pushViewController(vc, animated: true)
-        case .forgotPassword:
-            let vc = AuthFactory().create(by: .forgotPassword)
-            viewController.navigationController?.pushViewController(vc, animated: true)
         }
         
     }
-    
 }

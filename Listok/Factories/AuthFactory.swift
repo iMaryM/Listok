@@ -36,12 +36,16 @@ private extension AuthFactory {
     }
     
     func getSignUpViewController() -> UIViewController {
-        let vc = SignUpViewController()
+        let service = FireBaseAuthManager.shared
+        let router = SignUpRouter()
+        let vc = SignUpViewController(authService: service, router: router)
         return vc
     }
     
     func getForgotPasswordViewController() -> UIViewController {
-        let vc = ForgotPasswordViewController()
+        let service = FireBaseAuthManager.shared
+        let router = ForgotPasswordRouter()
+        let vc = ForgotPasswordViewController(authService: service, router: router)
         return vc
     }
 }

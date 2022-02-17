@@ -22,7 +22,7 @@ class SplashRouter: SplashRouterProtocol {
     func perform(to segue: SplashSegue, viewController: UIViewController) {
         switch segue {
         case .goToSignUp:
-            let vc = SignUpViewController()
+            let vc = AuthFactory().create(by: .signUp)
             viewController.navigationController?.pushViewController(vc, animated: true)
         case .goToLogin:
             let vc = AuthFactory().create(by: .login)
@@ -30,5 +30,4 @@ class SplashRouter: SplashRouterProtocol {
         }
         
     }
-    
 }

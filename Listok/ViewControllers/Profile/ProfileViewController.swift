@@ -16,7 +16,19 @@ class ProfileViewController: UIViewController {
     lazy var emailLabel = createEmailLabel()
     private lazy var logOutButton = createLogOutButton()
     
-    private let authManager = FireBaseAuthManager.shared
+    private let authService: AuthServiceProtocol
+    private let router: ProfileRouterProtocol
+    
+    //MARK: - initializer
+    init(authService: AuthServiceProtocol, router: ProfileRouterProtocol) {
+        self.authService = authService
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -31,8 +43,8 @@ class ProfileViewController: UIViewController {
         let alert = UIAlertController(title: "Log Out", message: "Are you sure to log out from this account ?", preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let sureButton = UIAlertAction(title: "Sure", style: .default) { _ in
-            self.authManager.logOut {
-                self.navigationController?.popViewController(animated: true)
+            self.authService.logOut {
+                self.router.perform(segue: .goToLogin, viewController: self)
             }
         }
         alert.addAction(cancelButton)
