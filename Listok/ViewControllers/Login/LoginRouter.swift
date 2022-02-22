@@ -26,11 +26,10 @@ class LoginRouter: LoginRouterProtocol {
             let vc = AuthFactory().create(by: .signUp)
             viewController.navigationController?.pushViewController(vc, animated: true)
         case .goToTask:
-            let authService = FireBaseAuthManager.shared
-            let router = ProfileRouter()
-            let firstVC = TaskViewController()
-            let secondVC = ProfileViewController(authService: authService, router: router)
-            let vc = ContainerFactory().create(firstViewController: firstVC, secondViewController: secondVC)
+            let controllerFactory = TaskFactory()
+            let firstVC = controllerFactory.create(.task)
+            let secondVC = controllerFactory.create(.profile)
+            let vc = ContainerFactory().createContainer(firstViewController: firstVC, secondViewController: secondVC)
             viewController.navigationController?.pushViewController(vc, animated: true)
         case .forgotPassword:
             let vc = AuthFactory().create(by: .forgotPassword)

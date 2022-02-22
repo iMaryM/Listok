@@ -18,7 +18,6 @@ protocol ProfileRouterProtocol {
 
 class ProfileRouter: ProfileRouterProtocol {
     func perform(segue: ProfileSegue, viewController: UIViewController) {
-        let vc = AuthFactory().create(by: .login)
-        viewController.navigationController?.pushViewController(vc, animated: true)
+        viewController.navigationController?.popViewController(animated: true)
     }
 }

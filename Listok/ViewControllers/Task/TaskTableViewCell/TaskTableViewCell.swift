@@ -9,7 +9,9 @@ import UIKit
 
 class TaskTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var tableViewCell: UIView!
+    @IBOutlet weak var contentViewCell: UIView!
+    @IBOutlet weak var taskLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,8 +24,9 @@ class TaskTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell() {
-        tableViewCell.layer.cornerRadius = 16
+    func setupCell(_ taskModel: TaskModel) {
+        taskLabel.text = taskModel.title
+        timeLabel.text = taskModel.time
+        contentViewCell.layer.cornerRadius = 16
     }
-    
 }

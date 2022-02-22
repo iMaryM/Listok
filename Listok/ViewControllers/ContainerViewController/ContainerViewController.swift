@@ -40,6 +40,12 @@ class ContainerViewController: UIViewController {
         firstViewController.view.isHidden = true
     }
     
+    @objc
+    private func moveToAddViewController() {
+        let vc = AddTaskViewController()
+        present(vc, animated: true, completion: nil)
+    }
+    
     func setViewController(firstViewController: UIViewController, secondViewController: UIViewController) {
         self.firstViewController = firstViewController
         self.secondViewController = secondViewController
@@ -110,6 +116,7 @@ private extension ContainerViewController {
         button.backgroundColor = UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
         button.layer.cornerRadius = 25
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(moveToAddViewController), for: .touchUpInside)
         return button
     }
     

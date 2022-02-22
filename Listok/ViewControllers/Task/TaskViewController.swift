@@ -7,8 +7,12 @@
 
 import UIKit
 
-class TaskViewController: UIViewController {
+protocol TaskViewControllerProtocol: AnyObject {
 
+}
+
+class TaskViewController: UIViewController, TaskViewControllerProtocol {
+    
     //MARK: - property
     private lazy var taskLabel = createTaskLabel()
     private lazy var dateLabel = createDateLabel()
@@ -18,21 +22,23 @@ class TaskViewController: UIViewController {
     private lazy var withoutTaskLabel = createWithoutTaskLabel()
     private lazy var taskTableView = createTaskTableView()
     
-    private let taskModel = TaskModel()
-    private var arrayOfDates = [DateModel]()
+    private var presenter: TaskPresenterProtocol!
     
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         prepareUI()
+    
+        withoutTaskImageView.isHidden = !presenter.getTasks().isEmpty
+        withoutTaskLabel.isHidden = !presenter.getTasks().isEmpty
         
-        dateLabel.attributedText = taskModel.createDateLabelText()
-        arrayOfDates = taskModel.getDates()
-        
-        calendarCollectionView.reloadData()
     }
-
+    
+    func setPresenter(_ presenter: TaskPresenterProtocol) {
+        self.presenter = presenter
+    }
+    
 }
 
 //MARK: - prepare UI
@@ -44,14 +50,14 @@ private extension TaskViewController {
         view.addSubview(dateLabel)
         view.addSubview(calendarCollectionView)
         view.addSubview(todayLabel)
-//        view.addSubview(taskTableView)
+        view.addSubview(taskTableView)
         view.addSubview(withoutTaskImageView)
         view.addSubview(withoutTaskLabel)
         pinTaskLabel()
         pinDateLabel()
         pinCalendarCollectionView()
         pinTodayLabel()
-//        pinTaskTableView()
+        pinTaskTableView()
         pinWithoutTaskImageView()
         pinWithoutTaskLabel()
     }
@@ -74,6 +80,7 @@ private extension TaskViewController {
     func createDateLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.attributedText = presenter.getAttributedStringFromCurrentDate()
         label.textAlignment = .left
         label.numberOfLines = 2
         return label
@@ -135,6 +142,8 @@ private extension TaskViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.allowsSelection = false
         return tableView
     }
     
@@ -214,7 +223,7 @@ extension TaskViewController: UICollectionViewDelegate {
 
 extension TaskViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return presenter.getDates().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -222,7 +231,8 @@ extension TaskViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.setUpCell(date: arrayOfDates[indexPath.row])
+        let date = presenter.getDates()[indexPath.row]
+        cell.setUpCell(date: date)
         
         return cell
     }
@@ -233,31 +243,15 @@ extension TaskViewController: UICollectionViewDataSource {
 extension TaskViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 12
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        return 96.0
     }
     
 }
 
 extension TaskViewController: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return presenter.getTasks().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -265,7 +259,8 @@ extension TaskViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.setupCell()
+        let task = presenter.getTasks()[indexPath.row]
+        cell.setupCell(task)
         
         return cell
     }
