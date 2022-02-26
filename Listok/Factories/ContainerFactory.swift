@@ -9,34 +9,30 @@ import Foundation
 import UIKit
 
 protocol ContainerFactoryProtocol {
-    func createContainer(firstViewController: UIViewController, secondViewController: UIViewController) -> ContainerViewController
+    func createContainer(firstViewController: TaskViewControllerDelegate, secondViewController: UIViewController) -> ContainerViewController
 }
 
 class ContainerFactory: ContainerFactoryProtocol {
-    func createContainer(firstViewController: UIViewController, secondViewController: UIViewController) -> ContainerViewController {
+    func createContainer(firstViewController: TaskViewControllerDelegate, secondViewController: UIViewController) -> ContainerViewController {
         let viewController = ContainerViewController()
         viewController.setViewController(firstViewController: firstViewController, secondViewController: secondViewController)
         return viewController
     }
 }
 
-enum IDViewControllers {
-    case task
-    case profile
-}
-
 protocol TaskFactoryProtocol {
-    func create(_ id: IDViewControllers) -> UIViewController
+    func createViewController() -> UIViewController
+    func createTaskViewController() -> TaskViewControllerDelegate
 }
 
 class TaskFactory: TaskFactoryProtocol {
-    func create(_ id: IDViewControllers) -> UIViewController {
-        switch id {
-        case .task:
-            return getTaskViewController()
-        case .profile:
+    func createViewController() -> UIViewController {
+
             return  getProfilleController()
-        }
+    }
+    
+    func createTaskViewController() -> TaskViewControllerDelegate {
+        return getTaskViewController()
     }
 }
 

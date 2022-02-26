@@ -8,10 +8,14 @@
 import UIKit
 
 protocol TaskViewControllerProtocol: AnyObject {
-
+    func updateTaskTable()
 }
 
-class TaskViewController: UIViewController, TaskViewControllerProtocol {
+protocol TaskViewControllerDelegate: UIViewController {
+    func addTask(task: TaskModel)
+}
+
+class TaskViewController: UIViewController {
     
     //MARK: - property
     private lazy var taskLabel = createTaskLabel()
@@ -29,7 +33,7 @@ class TaskViewController: UIViewController, TaskViewControllerProtocol {
         super.viewDidLoad()
         
         prepareUI()
-    
+
         withoutTaskImageView.isHidden = !presenter.getTasks().isEmpty
         withoutTaskLabel.isHidden = !presenter.getTasks().isEmpty
         
@@ -80,7 +84,7 @@ private extension TaskViewController {
     func createDateLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.attributedText = presenter.getAttributedStringFromCurrentDate()
+        label.attributedText = Date().getAttributedStringDate()
         label.textAlignment = .left
         label.numberOfLines = 2
         return label
@@ -265,4 +269,18 @@ extension TaskViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+extension TaskViewController: TaskViewControllerDelegate {
+    func addTask(task: TaskModel) {
+        presenter.addTask(task: task)
+    }
+}
+
+extension TaskViewController: TaskViewControllerProtocol {
+    func updateTaskTable() {
+        withoutTaskImageView.isHidden = !presenter.getTasks().isEmpty
+        withoutTaskLabel.isHidden = !presenter.getTasks().isEmpty
+        taskTableView.reloadData()
+    }
 }

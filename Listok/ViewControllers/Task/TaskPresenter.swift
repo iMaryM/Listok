@@ -11,20 +11,15 @@ protocol TaskPresenterProtocol {
     init(vc: TaskViewControllerProtocol)
     func getTasks() -> [TaskModel]
     func getDates() -> [DateModel]
-    func getAttributedStringFromCurrentDate() -> NSMutableAttributedString
+    func addTask(task: TaskModel)
 }
 
 class TaskPresenter: TaskPresenterProtocol {
     
     private weak var vc: TaskViewControllerProtocol?
-    private var tasks: [TaskModel] = [
-        TaskModel(title: "wrwerwer", time: "12:12:12"),
-        TaskModel(title: "wqw   q", time: "12:12:12"),
-        TaskModel(title: "qe     q  e q ", time: "12:12:12"),
-        TaskModel(title: "123  123 eqw qw", time: "12:12:12"),
-        TaskModel(title: "qwe", time: "12:12:12")
-    ]
-    private var calendarCell = CalendarCellModel()
+    private var tasks: [TaskModel] = []
+    private var calendarDates = [DateModel]()
+
     
     required init(vc: TaskViewControllerProtocol) {
         self.vc = vc
@@ -35,11 +30,15 @@ class TaskPresenter: TaskPresenterProtocol {
     }
     
     func getDates() -> [DateModel] {
-        return calendarCell.getDates()
+        return calendarDates.generateDates()
     }
     
-    func getAttributedStringFromCurrentDate() -> NSMutableAttributedString {
-        return calendarCell.createDateLabelText()
+    func addTask(task: TaskModel) {
+        tasks.append(task)
+        vc?.updateTaskTable()
     }
     
 }
+
+
+

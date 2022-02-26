@@ -15,8 +15,8 @@ class ContainerViewController: UIViewController {
     private lazy var addTaskButton = createAddTaskButton()
     private lazy var profileButton = createProfileButton()
     
-    private var firstViewController = UIViewController()
-    private var secondViewController = UIViewController()
+    private var firstViewController: TaskViewControllerDelegate?
+    private var secondViewController: UIViewController?
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -30,23 +30,27 @@ class ContainerViewController: UIViewController {
     //MARK: - actions
     @objc
     private func moveToTaskViewController() {
-        secondViewController.view.isHidden = true
-        firstViewController.view.isHidden = false
+        secondViewController?.view.isHidden = true
+        firstViewController?.view.isHidden = false
     }
 
     @objc
     private func moveToProfileViewController() {
-        secondViewController.view.isHidden = false
-        firstViewController.view.isHidden = true
+        secondViewController?.view.isHidden = false
+        firstViewController?.view.isHidden = true
     }
     
     @objc
     private func moveToAddViewController() {
         let vc = AddTaskViewController()
+        guard let firstViewController = firstViewController else {
+            return
+        }
+        vc.delegate = firstViewController
         present(vc, animated: true, completion: nil)
     }
     
-    func setViewController(firstViewController: UIViewController, secondViewController: UIViewController) {
+    func setViewController(firstViewController: TaskViewControllerDelegate, secondViewController: UIViewController) {
         self.firstViewController = firstViewController
         self.secondViewController = secondViewController
     }
@@ -57,6 +61,9 @@ class ContainerViewController: UIViewController {
 private extension ContainerViewController {
     
     func setUpContainerViewController() {
+        guard let firstViewController = firstViewController,
+              let secondViewController = secondViewController else {return}
+        
         addChild(firstViewController)
         addChild(secondViewController)
         

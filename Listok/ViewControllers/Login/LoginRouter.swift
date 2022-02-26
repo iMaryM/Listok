@@ -27,8 +27,8 @@ class LoginRouter: LoginRouterProtocol {
             viewController.navigationController?.pushViewController(vc, animated: true)
         case .goToTask:
             let controllerFactory = TaskFactory()
-            let firstVC = controllerFactory.create(.task)
-            let secondVC = controllerFactory.create(.profile)
+            let firstVC = controllerFactory.createTaskViewController()
+            let secondVC = controllerFactory.createViewController()
             let vc = ContainerFactory().createContainer(firstViewController: firstVC, secondViewController: secondVC)
             viewController.navigationController?.pushViewController(vc, animated: true)
         case .forgotPassword:
