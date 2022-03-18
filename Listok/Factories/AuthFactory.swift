@@ -38,7 +38,11 @@ private extension AuthFactory {
     func getSignUpViewController() -> UIViewController {
         let service = FireBaseAuthManager.shared
         let router = SignUpRouter()
-        let vc = SignUpViewController(authService: service, router: router)
+        let vc = SignUpViewController()
+        let model = SignUpModel(authService: service)
+        let presenter = SignUpPresenter(model: model, router: router)
+        presenter.vc = vc
+        vc.setPresenter(presenter: presenter)
         return vc
     }
     

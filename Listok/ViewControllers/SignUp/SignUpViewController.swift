@@ -23,19 +23,7 @@ class SignUpViewController: UIViewController {
     private lazy var createButton = createCreateButton()
     private lazy var loginButton = createLoginButton()
     
-    private let authService: AuthServiceProtocol
-    private let router: SignUpRouterProtocol
-    
-    //MARK: - initializer
-    init(authService: AuthServiceProtocol, router: SignUpRouterProtocol) {
-        self.authService = authService
-        self.router = router
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private var presenter: SignUpPresenterProtocol?
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -44,57 +32,19 @@ class SignUpViewController: UIViewController {
         prepareUI()
     }
     
+    func setPresenter(presenter: SignUpPresenterProtocol) {
+        self.presenter = presenter
+    }
+    
     //MARK: - actions
     @objc
     private func goToLoginViewCOntroller() {
-        router.perform(to: .goToLogin, viewController: self)
+        presenter?.goToLoginViewCOntroller()
     }
     
     @objc
     private func createProfile() {
-        
-        guard let email = emailTextfield.text,
-              let password = passwordTextfield.text else {
-                  return
-              }
-        
-        authService.createUser(email: email, password: password) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-            case .success:
-                self.authService.signIn(email: email, password: password) { [weak self] result in
-                    
-                    guard let self = self else { return }
-                    
-                    switch result {
-                    case .success:
-                        
-                        if (self.checkSavedCredential()) {
-                            UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.email.rawValue)
-                            UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.password.rawValue)
-                        }
-                        
-                        UserDefaults.standard.setValue(email, forKey: KeyesUserDefaults.email.rawValue)
-                        UserDefaults.standard.setValue(password, forKey: KeyesUserDefaults.password.rawValue)
-                        
-                        
-                        self.router.perform(to: .goToTask, viewController: self)
-                    case .failure(let error):
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                        alert.addAction(action)
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            case .failure(let error):
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
+        presenter?.createProfile(email: emailTextfield.text ?? "", password: passwordTextfield.text ?? "")
     }
 }
 
@@ -316,12 +266,5 @@ extension SignUpViewController {
             loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-    }
-}
-
-//MARK: - check UserDefaults
-private extension SignUpViewController {
-    func checkSavedCredential() -> Bool {
-        return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil) || (UserDefaults.standard.value(forKey: KeyesUserDefaults.password.rawValue) != nil))
     }
 }

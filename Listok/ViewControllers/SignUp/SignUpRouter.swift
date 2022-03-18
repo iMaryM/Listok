@@ -11,6 +11,7 @@ import UIKit
 enum SignUpSegue {
     case goToTask
     case goToLogin
+    case showErrorAlert(error: Error)
 }
 
 protocol SignUpRouterProtocol {
@@ -30,6 +31,11 @@ class SignUpRouter: SignUpRouterProtocol {
             let secondVC = controllerFactory.createViewController()
             let vc = ContainerFactory().createContainer(firstViewController: firstVC, secondViewController: secondVC)
             viewController.navigationController?.pushViewController(vc, animated: true)
+        case .showErrorAlert(let error):
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(action)
+            viewController.present(alert, animated: true, completion: nil)
         }
         
     }
