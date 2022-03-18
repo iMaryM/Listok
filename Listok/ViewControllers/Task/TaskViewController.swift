@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DateScrollPicker
 
 protocol TaskViewControllerProtocol: AnyObject {
     func updateTaskTable()
@@ -92,15 +93,105 @@ private extension TaskViewController {
         return label
     }
     
-    func createcalendarCollectionView() -> UICollectionView {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UINib(nibName: "CalendarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CalendarCollectionViewCell")
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        return collectionView
+    func createcalendarCollectionView() -> DateScrollPicker {
+//        let flowLayout = UICollectionViewFlowLayout()
+//        flowLayout.scrollDirection = .horizontal
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//        collectionView.register(UINib(nibName: "CalendarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CalendarCollectionViewCell")
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+//        return collectionView
+        let dateScrollPicker = DateScrollPicker()
+        dateScrollPicker.translatesAutoresizingMaskIntoConstraints = false
+        var format = DateScrollPickerFormat()
+
+        /// Number of days
+        format.days = 7
+
+        /// Top label date format
+        format.topDateFormat = "MMMM"
+        /// Top label font
+        format.topFont = UIFont(name: "Roboto-Regular", size: 9) ?? UIFont.systemFont(ofSize: 9)
+        /// Top label text color
+        format.topTextColor = UIColor(red: 16 / 255, green: 38 / 255, blue: 90 / 255, alpha: 1)
+        /// Top label selected text color
+        format.topTextSelectedColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
+
+        // Medium label date format
+        format.mediumDateFormat = "dd"
+        /// Medium label font
+        format.mediumFont = UIFont(name: "Roboto-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15)
+        /// Medium label text color
+        format.mediumTextColor = UIColor(red: 16 / 255, green: 38 / 255, blue: 90 / 255, alpha: 1)
+        /// Medium label selected text color
+        format.mediumTextSelectedColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.4)
+        
+        /// Bottom label date format
+        format.bottomDateFormat = "EEE"
+        /// Bottom label font
+        format.bottomFont = UIFont(name: "Roboto-Regular", size: 9) ?? UIFont.systemFont(ofSize: 9)
+        /// Bottom label text color
+        format.bottomTextColor = UIColor(red: 16 / 255, green: 38 / 255, blue: 90 / 255, alpha: 1)
+        /// Bottom label selected text color
+        format.bottomTextSelectedColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
+
+        /// Day radius
+        format.dayRadius = 12
+
+        /// Day background color
+        format.dayBackgroundColor = .clear
+
+        /// Day background selected color
+        format.dayBackgroundSelectedColor = UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
+
+        /// Selection animation
+        format.animatedSelection = true
+
+        /// Separator enabled
+        format.separatorEnabled = true
+
+        /// Separator top label date format
+        format.separatorTopDateFormat = "MMM"
+
+        /// Separator top label font
+        format.separatorTopFont = UIFont.systemFont(ofSize: 4, weight: .bold)
+
+        /// Separator top label text color
+        format.separatorTopTextColor = UIColor.black
+
+        /// Separator bottom label date format
+        format.separatorBottomDateFormat = "yyyy"
+
+        /// Separator bottom label font
+        format.separatorBottomFont = UIFont.systemFont(ofSize: 4, weight: .regular)
+
+        /// Separator bottom label text color
+        format.separatorBottomTextColor = UIColor.black
+
+        /// Separator background color
+        format.separatorBackgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+
+        /// Fade enabled
+        format.fadeEnabled = false
+
+//        /// Animation scale factor
+//        format.animationScaleFactor = 1.1
+
+        /// Animation scale factor
+        format.dayPadding = 4
+
+        /// Top margin data label
+        format.topMarginData = 8
+
+        /// Dot view size
+        format.dotWidth = 8
+        
+        dateScrollPicker.format = format
+        dateScrollPicker.selectToday(animated: true)
+        dateScrollPicker.delegate = self
+        dateScrollPicker.dataSource = self
+        return dateScrollPicker
     }
     
     func createTodayLabel() -> UILabel {
@@ -216,66 +307,44 @@ private extension TaskViewController {
     
 }
 
-//MARK: - setup CollectionView
-extension TaskViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 7, height: collectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
-
-extension TaskViewController: UICollectionViewDelegate {
-
+//MARK: - setup DateScrollPicker
+extension TaskViewController: DateScrollPickerDelegate {
     
 }
 
-extension TaskViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.getDates().count
+extension TaskViewController: DateScrollPickerDataSource {
+    // Returns custom color for dot view
+    func dateScrollPicker(_ dateScrollPicker: DateScrollPicker, dotColorByDate date: Date) -> UIColor? {
+        return UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.7)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCollectionViewCell", for: indexPath) as? CalendarCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        let date = presenter.getDates()[indexPath.row]
-        cell.setUpCell(date: date)
-        
-        return cell
-    }
-    
 }
 
 //MARK: - setup TableView
 extension TaskViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 96.0
     }
-    
+
 }
 
 extension TaskViewController: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.getTasks().count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell") as? TaskTableViewCell else {
             return UITableViewCell()
         }
-        
+
         let task = presenter.getTasks()[indexPath.row]
         cell.setupCell(task)
-        
+
         return cell
     }
-    
+
 }
 
 extension TaskViewController: TaskViewControllerDelegate {

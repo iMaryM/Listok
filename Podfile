@@ -7,5 +7,6 @@ target 'Listok' do
 
   # Pods for Listok
   pod 'Firebase/Auth'
+  pod 'DateScrollPicker'
 
 end
