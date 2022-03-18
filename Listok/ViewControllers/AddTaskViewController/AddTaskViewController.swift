@@ -33,7 +33,7 @@ class AddTaskViewController: UIViewController {
 
    // weak var delegate: TaskViewControllerDelegate?
     
-    var closure: ((TaskModel) -> ())?
+    var closure: ((ListTaskModel) -> ())?
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class AddTaskViewController: UIViewController {
         guard let title = inputTitleTextfield.text else {return}
         let beginTime = inputBeginTime.date.getFormettedDateString(format: "HH:mm")
         let endTime = inputBeginTime.date.getFormettedDateString(format: "HH:mm")
-        let task = TaskModel(title: title, time: "\(beginTime) - \(endTime)")
+        let task = ListTaskModel(title: title, time: "\(beginTime) - \(endTime)")
         
         closure?(task)
         

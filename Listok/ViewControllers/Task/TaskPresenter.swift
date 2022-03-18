@@ -9,15 +9,16 @@ import Foundation
 
 protocol TaskPresenterProtocol {
     init(vc: TaskViewControllerProtocol)
-    func getTasks() -> [TaskModel]
+    func getTasks() -> [ListTaskModel]
     func getDates() -> [DateModel]
-    func addTask(task: TaskModel)
+    func addTask(task: ListTaskModel)
+    func deleteTask(taskIndex: Int)
 }
 
 class TaskPresenter: TaskPresenterProtocol {
     
     private weak var vc: TaskViewControllerProtocol?
-    private var tasks: [TaskModel] = []
+    private var tasks: [ListTaskModel] = []
     private var calendarDates = [DateModel]()
 
     
@@ -25,7 +26,7 @@ class TaskPresenter: TaskPresenterProtocol {
         self.vc = vc
     }
     
-    func getTasks() -> [TaskModel] {
+    func getTasks() -> [ListTaskModel] {
         return tasks
     }
     
@@ -33,8 +34,13 @@ class TaskPresenter: TaskPresenterProtocol {
         return calendarDates.generateDates()
     }
     
-    func addTask(task: TaskModel) {
+    func addTask(task: ListTaskModel) {
         tasks.append(task)
+        vc?.updateTaskTable()
+    }
+    
+    func deleteTask(taskIndex: Int) {
+        tasks.remove(at: taskIndex)
         vc?.updateTaskTable()
     }
     

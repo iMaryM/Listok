@@ -24,7 +24,7 @@ class TaskTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell(_ taskModel: TaskModel) {
+    func setupCell(_ taskModel: ListTaskModel) {
         taskLabel.text = taskModel.title
         timeLabel.text = taskModel.time
         contentViewCell.layer.cornerRadius = 16

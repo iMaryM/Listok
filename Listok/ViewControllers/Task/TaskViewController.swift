@@ -13,7 +13,7 @@ protocol TaskViewControllerProtocol: AnyObject {
 }
 
 protocol TaskViewControllerDelegate: UIViewController {
-    func addTask(task: TaskModel)
+    func addTask(task: ListTaskModel)
 }
 
 class TaskViewController: UIViewController {
@@ -325,6 +325,16 @@ extension TaskViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 96.0
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        let trashAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            self.presenter.deleteTask(taskIndex: indexPath.row)
+            success(true)
+        })
+        
+        return UISwipeActionsConfiguration(actions: [trashAction])
+    }
 
 }
 
@@ -348,7 +358,7 @@ extension TaskViewController: UITableViewDataSource {
 }
 
 extension TaskViewController: TaskViewControllerDelegate {
-    func addTask(task: TaskModel) {
+    func addTask(task: ListTaskModel) {
         presenter.addTask(task: task)
     }
 }
