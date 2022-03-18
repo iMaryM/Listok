@@ -43,10 +43,13 @@ class ContainerViewController: UIViewController {
     @objc
     private func moveToAddViewController() {
         let vc = AddTaskViewController()
-        guard let firstViewController = firstViewController else {
-            return
+
+        vc.closure = { [weak self] task in
+            guard let self = self,
+                  let firstViewController = self.firstViewController else { return }
+            firstViewController.addTask(task: task)
         }
-        vc.delegate = firstViewController
+        
         present(vc, animated: true, completion: nil)
     }
     
@@ -54,7 +57,6 @@ class ContainerViewController: UIViewController {
         self.firstViewController = firstViewController
         self.secondViewController = secondViewController
     }
-    
 }
 
 //MARK: - setup Container

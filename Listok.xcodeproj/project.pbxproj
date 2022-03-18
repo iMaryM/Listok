@@ -36,6 +36,7 @@
 		848E310A27BBA05F00A08014 /* Date+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E310927BBA05F00A08014 /* Date+Format.swift */; };
 		848E310D27BBC7AC00A08014 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E310C27BBC7AC00A08014 /* SignUpRouter.swift */; };
 		84A9543027C6152500E1AFBA /* Sequence+DateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9542F27C6152500E1AFBA /* Sequence+DateGenerator.swift */; };
+		84B2038827E10F1B00831799 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2038727E10F1B00831799 /* SignUpPresenter.swift */; };
 		84D7066527AC34B300D9B874 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */; };
 		84D7066A27AC4E3E00D9B874 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066927AC4E3E00D9B874 /* TaskViewController.swift */; };
 		84DB37C427B5A6250028F6CA /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB37C327B5A6250028F6CA /* ContainerViewController.swift */; };
@@ -81,6 +82,7 @@
 		848E310927BBA05F00A08014 /* Date+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Format.swift"; sourceTree = "<group>"; };
 		848E310C27BBC7AC00A08014 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
 		84A9542F27C6152500E1AFBA /* Sequence+DateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+DateGenerator.swift"; sourceTree = "<group>"; };
+		84B2038727E10F1B00831799 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
 		84D7066927AC4E3E00D9B874 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		84DB37C327B5A6250028F6CA /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				84310EDA27A8467800E972E4 /* SignUpViewController.swift */,
 				848E310C27BBC7AC00A08014 /* SignUpRouter.swift */,
+				84B2038727E10F1B00831799 /* SignUpPresenter.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				8448524B27BD52AB0069C61C /* ForgotPasswordRouter.swift in Sources */,
 				84ED1F6227AD5915003D83B0 /* UserModel.swift in Sources */,
 				844BF43727B544FD004CEC6C /* KyesForUserDefaults.swift in Sources */,
+				84B2038827E10F1B00831799 /* SignUpPresenter.swift in Sources */,
 				84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

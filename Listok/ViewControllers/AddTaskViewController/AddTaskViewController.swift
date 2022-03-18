@@ -31,7 +31,9 @@ class AddTaskViewController: UIViewController {
     private lazy var descriptionSeparatorLine = createSeparatorLine()
     private lazy var addButton = createAddButton()
 
-    weak var delegate: TaskViewControllerDelegate?
+   // weak var delegate: TaskViewControllerDelegate?
+    
+    var closure: ((TaskModel) -> ())?
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -52,7 +54,10 @@ class AddTaskViewController: UIViewController {
         let beginTime = inputBeginTime.date.getFormettedDateString(format: "HH:mm")
         let endTime = inputBeginTime.date.getFormettedDateString(format: "HH:mm")
         let task = TaskModel(title: title, time: "\(beginTime) - \(endTime)")
-        delegate?.addTask(task: task)
+        
+        closure?(task)
+        
+//        delegate?.addTask(task: task)
         dismiss(animated: true, completion: nil)
     }
     

@@ -28,6 +28,7 @@
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRP-B5-m3y">
                         <rect key="frame" x="16" y="16" width="2" height="84"/>
+                        <color key="backgroundColor" red="0.56427222489999995" green="0.49543488029999999" blue="0.99612432719999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="2" id="xBT-PO-lzp"/>
                         </constraints>

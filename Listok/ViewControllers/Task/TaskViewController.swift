@@ -28,6 +28,8 @@ class TaskViewController: UIViewController {
     
     private var presenter: TaskPresenterProtocol!
     
+    //private var addTaskViewController: AddTaskViewController()
+    
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,15 +154,18 @@ private extension TaskViewController {
     }
     
     func pinTaskLabel() {
+        let heightStatusBar = UIApplication.shared.statusBarFrame.size.height
+        
         NSLayoutConstraint.activate([
-            taskLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
-            taskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24)
+            taskLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: heightStatusBar),
+            taskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            taskLabel.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
     
     func pinDateLabel() {
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
+            dateLabel.centerYAnchor.constraint(equalTo: taskLabel.centerYAnchor),
             dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24)
         ])
     }
@@ -169,38 +174,40 @@ private extension TaskViewController {
         NSLayoutConstraint.activate([
             calendarCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
             calendarCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
-            calendarCollectionView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 32),
+            calendarCollectionView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 16),
             calendarCollectionView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
     func pinTodayLabel() {
         NSLayoutConstraint.activate([
-            todayLabel.topAnchor.constraint(equalTo: calendarCollectionView.bottomAnchor, constant: 40),
-            todayLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24)
+            todayLabel.topAnchor.constraint(equalTo: calendarCollectionView.bottomAnchor, constant: 16),
+            todayLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            todayLabel.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
     
     func pinWithoutTaskImageView() {
         NSLayoutConstraint.activate([
-            withoutTaskImageView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 56),
+            withoutTaskImageView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 16),
             withoutTaskImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            withoutTaskImageView.heightAnchor.constraint(equalToConstant: 200),
-            withoutTaskImageView.widthAnchor.constraint(equalToConstant: 200)
+            withoutTaskImageView.heightAnchor.constraint(equalToConstant: 150),
+            withoutTaskImageView.widthAnchor.constraint(equalToConstant: 150)
         ])
     }
     
     func pinWithoutTaskLabel() {
         NSLayoutConstraint.activate([
-            withoutTaskLabel.topAnchor.constraint(equalTo: withoutTaskImageView.bottomAnchor, constant: 32),
+            withoutTaskLabel.topAnchor.constraint(equalTo: withoutTaskImageView.bottomAnchor, constant: 24),
             withoutTaskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 64),
-            withoutTaskLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64)
+            withoutTaskLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64),
+            withoutTaskLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -116)
         ])
     }
     
     func pinTaskTableView() {
         NSLayoutConstraint.activate([
-            taskTableView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 32),
+            taskTableView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 16),
             taskTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
             taskTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
             taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32)
