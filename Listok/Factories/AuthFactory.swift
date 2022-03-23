@@ -31,7 +31,11 @@ private extension AuthFactory {
     func getLoginViewController() -> UIViewController {
         let service = FireBaseAuthManager.shared
         let router = LoginRouter()
-        let vc = LoginViewController(authService: service, router: router)
+        let model = LoginModel(authService: service)
+        let presenter = LoginPresenter(model: model, router: router)
+        let vc = LoginViewController()
+        presenter.vc = vc
+        vc.setPresenter(presenter: presenter)
         return vc
     }
     
@@ -49,7 +53,11 @@ private extension AuthFactory {
     func getForgotPasswordViewController() -> UIViewController {
         let service = FireBaseAuthManager.shared
         let router = ForgotPasswordRouter()
-        let vc = ForgotPasswordViewController(authService: service, router: router)
+        let forgotPasswordModel = ForgotPasswordModel(authService: service, router: router)
+        let presenter = ForgotPasswordPresenter(model: forgotPasswordModel)
+        let vc = ForgotPasswordViewController()
+        presenter.vc = vc
+        vc.setPresenter(presenter: presenter)
         return vc
     }
 }

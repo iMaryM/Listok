@@ -10,6 +10,8 @@ import UIKit
 
 enum ForgotPasswordSegue {
     case goToLogin
+    case showSuccessAlert
+    case showErrorAlert(error: Error)
 }
 
 protocol ForgotPasswordRouterProtocol {
@@ -22,6 +24,18 @@ class ForgotPasswordRouter: ForgotPasswordRouterProtocol {
         case .goToLogin:
             let vc = AuthFactory().create(by: .login)
             viewController.navigationController?.pushViewController(vc, animated: true)
+        case .showSuccessAlert:
+            let alert = UIAlertController(title: "Success", message: "Reset password email has been successfully sent", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel) { action in
+                viewController.navigationController?.popViewController(animated: true)
+            }
+            alert.addAction(action)
+            viewController.present(alert, animated: true, completion: nil)
+        case .showErrorAlert(let error):
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(action)
+            viewController.present(alert, animated: true, completion: nil)
         }
     }
 }

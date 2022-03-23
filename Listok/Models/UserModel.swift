@@ -11,10 +11,12 @@ class UserModel {
     
     var username: String?
     var email: String
+    var password: String?
     
-    init(username: String? = nil, email: String) {
+    init(username: String? = nil, email: String, password: String? = nil) {
         self.username = username
         self.email = email
+        self.password = password
     }
     
 }

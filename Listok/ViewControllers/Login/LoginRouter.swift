@@ -12,6 +12,7 @@ enum LoginSegue {
     case goToSignUp
     case goToTask
     case forgotPassword
+    case showErorrAlert(error: Error)
 }
 
 protocol LoginRouterProtocol {
@@ -34,6 +35,11 @@ class LoginRouter: LoginRouterProtocol {
         case .forgotPassword:
             let vc = AuthFactory().create(by: .forgotPassword)
             viewController.navigationController?.pushViewController(vc, animated: true)
+        case .showErorrAlert(let error):
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(action)
+            viewController.present(alert, animated: true, completion: nil)
         }
         
     }

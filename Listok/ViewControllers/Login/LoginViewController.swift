@@ -22,44 +22,32 @@ class LoginViewController: UIViewController {
     private lazy var loginButton = createLoginButton()
     private lazy var signUpButton = createSignUp()
     
-    private let authManager: AuthServiceProtocol
-    private let router: LoginRouterProtocol
-    
-    private var emailText: String? = nil
-    private var passwordText: String? = nil
+    private var presenter: LoginPresenter?
     
     //MARK: - initializer
-    init(authService: AuthServiceProtocol, router: LoginRouterProtocol) {
-        self.router = router
-        authManager = authService
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if checkSavedCredential() {
-            emailText = UserDefaults.standard.string(forKey: KeyesUserDefaults.email.rawValue)
-            passwordText = UserDefaults.standard.string(forKey: KeyesUserDefaults.password.rawValue)
-        }
-        
         prepareUI()
+    }
+    
+    func setPresenter(presenter: LoginPresenter) {
+        self.presenter = presenter
+        loginTextfield.text = presenter.getCredentials().email
+        passwordTextfield.text = presenter.getCredentials().password
     }
     
     //MARK: - actions
     @objc
     private func goToForgotPasswordViewCOntroller() {
-        router.perform(to: .forgotPassword, viewController: self)
+        presenter?.goToForgotPasswordViewCOntroller()
     }
     
     @objc
     private func goToSignUpViewCOntroller() {
-        router.perform(to: .goToSignUp, viewController: self)
+        presenter?.goToSignUpViewCOntroller()
     }
     
     @objc
@@ -69,27 +57,8 @@ class LoginViewController: UIViewController {
               let password = passwordTextfield.text else {
                   return
               }
-        
-        authManager.signIn(email: email, password: password) { [weak self] result in
-            switch result {
-            case .success():
-                
-                if (self?.checkSavedCredential())! {
-                    UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.email.rawValue)
-                    UserDefaults.standard.removeObject(forKey: KeyesUserDefaults.password.rawValue)
-                }
-                
-                UserDefaults.standard.setValue(email, forKey: KeyesUserDefaults.email.rawValue)
-                UserDefaults.standard.setValue(password, forKey: KeyesUserDefaults.password.rawValue)
-                
-                self?.router.perform(to: .goToTask, viewController: self!)
-            case .failure(let error):
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alert.addAction(action)
-                self?.present(alert, animated: true, completion: nil)
-            }
-        }
+    
+        presenter?.goToTaskViewController(email: email, password: password)
     }
     
 }
@@ -149,7 +118,6 @@ private extension LoginViewController {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Email ID or Username"
-        textfield.text = emailText
         return textfield
     }
     
@@ -173,7 +141,6 @@ private extension LoginViewController {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Password"
-        textfield.text = passwordText
         return textfield
     }
     
@@ -317,11 +284,4 @@ private extension LoginViewController {
         ])
     }
     
-}
-
-//MARK: - check UserDefaults
-private extension LoginViewController {
-    func checkSavedCredential() -> Bool {
-        return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil) || (UserDefaults.standard.value(forKey: KeyesUserDefaults.password.rawValue) != nil))
-    }
 }

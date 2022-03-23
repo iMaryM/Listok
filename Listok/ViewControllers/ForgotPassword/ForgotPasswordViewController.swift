@@ -11,45 +11,31 @@ class ForgotPasswordViewController: UIViewController {
 
     //MARK: - property
     private lazy var forgotPasswordLabel = createForgotPasswordLabel()
-
     private lazy var emailIcon = createEmailIcon()
     private lazy var emailTextfield = createEmailTextfield()
     private lazy var separateLineEmail = cresteSeparateLine()
     private lazy var sendButton = createSendButton()
     private lazy var loginButton = createLoginButton()
     
-    private let authService: AuthServiceProtocol
-    private let router: ForgotPasswordRouterProtocol
-    
-    private var emailText: String? = nil
-    
-    //MARK: - initializer
-    init(authService: AuthServiceProtocol, router: ForgotPasswordRouterProtocol) {
-        self.authService = authService
-        self.router = router
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private var presenter: ForgotPasswordPresenterProtocol?
     
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if checkSavedCredential() {
-            emailText = UserDefaults.standard.string(forKey: KeyesUserDefaults.email.rawValue)
-        }
-        
         prepareUI()
         
+    }
+    
+    func setPresenter(presenter: ForgotPasswordPresenterProtocol) {
+        self.presenter = presenter
+        emailTextfield.text = presenter.getCredentials()
     }
     
     //MARK: - actions
     @objc
     private func goToLoginViewCOntroller() {
-        router.perform(segue: .goToLogin, viewController: self)
+        presenter?.goToLoginViewCOntroller()
     }
     
     @objc
@@ -58,23 +44,7 @@ class ForgotPasswordViewController: UIViewController {
             return
         }
         
-        authService.sendPasswordReset(withEmail: email) { result in
-            switch result {
-            case .success:
-                let alert = UIAlertController(title: "Success", message: "Reset password email has been successfully sent", preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .cancel) { action in
-                    self.navigationController?.popViewController(animated: true)
-                }
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
-            case .failure(let error):
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
-        
+        presenter?.sendPassword(email: email)
     }
 
 }
@@ -124,7 +94,6 @@ extension ForgotPasswordViewController {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Email ID"
-        textfield.text = emailText
         return textfield
     }
     
@@ -207,12 +176,5 @@ extension ForgotPasswordViewController {
             loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-    }
-}
-
-//MARK: - check UserDefaults
-private extension ForgotPasswordViewController {
-    func checkSavedCredential() -> Bool {
-        return ((UserDefaults.standard.value(forKey: KeyesUserDefaults.email.rawValue) != nil))
     }
 }
