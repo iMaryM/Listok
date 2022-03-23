@@ -9,11 +9,11 @@ import Foundation
 
 class UserModel {
     
-    var username: String?
+    var username: String
     var email: String
-    var password: String?
+    var password: String
     
-    init(username: String? = nil, email: String, password: String? = nil) {
+    init(username: String, email: String, password: String) {
         self.username = username
         self.email = email
         self.password = password

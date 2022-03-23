@@ -8,6 +8,7 @@
 import Foundation
 
 enum KeyesUserDefaults: String {
+    case username = "username_"
     case email = "emil_"
     case password = "password_"
 }

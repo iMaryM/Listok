@@ -10,7 +10,7 @@ import UIKit
 
 protocol SignUpPresenterProtocol {
     func goToLoginViewCOntroller()
-    func createProfile(email: String, password: String)
+    func createProfile(user: UserModel)
 }
 
 class SignUpPresenter: SignUpPresenterProtocol {
@@ -29,8 +29,8 @@ class SignUpPresenter: SignUpPresenterProtocol {
         router.perform(to: .goToLogin, viewController: vc)
     }
     
-    func createProfile(email: String, password: String) {
-        model.createUser(email: email, password: password) { [weak self] result in
+    func createProfile(user: UserModel) {
+        model.createUser(user: user) { [weak self] result in
             
             guard let self = self,
             let vc = self.vc else {return}
@@ -43,7 +43,5 @@ class SignUpPresenter: SignUpPresenterProtocol {
             }
         }
     }
-    
-
     
 }

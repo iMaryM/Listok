@@ -93,12 +93,12 @@ private extension ProfileViewController {
     func createUsernameLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        let string = "username"
+        let string = UserDefaults.standard.string(forKey: KeyesUserDefaults.username.rawValue)
         let attrs: [NSAttributedString.Key : Any] = [
             .font : UIFont(name: "Roboto-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24),
             .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
         ]
-        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        let attributedString = NSMutableAttributedString(string: string ?? "username", attributes: attrs)
         label.attributedText = attributedString
         label.textAlignment = .center
         label.numberOfLines = 1
@@ -108,12 +108,12 @@ private extension ProfileViewController {
     func createEmailLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        let string = "email"
+        let string = UserDefaults.standard.string(forKey: KeyesUserDefaults.email.rawValue)
         let attrs: [NSAttributedString.Key : Any] = [
             .font : UIFont(name: "Roboto-Regular", size: 18) ?? UIFont.systemFont(ofSize: 18),
             .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
         ]
-        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        let attributedString = NSMutableAttributedString(string: string ?? "email", attributes: attrs)
         label.attributedText = attributedString
         label.textAlignment = .center
         label.numberOfLines = 1

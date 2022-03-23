@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SignUpModelProtocol {
-    func createUser(email: String, password: String, closure: @escaping  (Result<Void, Error>) -> Void)
+    func createUser(user: UserModel, closure: @escaping  (Result<Void, Error>) -> Void) 
 }
 
 class SignUpModel: SignUpModelProtocol {
@@ -20,21 +20,21 @@ class SignUpModel: SignUpModelProtocol {
         self.authService = authService
     }
     
-    func createUser(email: String, password: String, closure: @escaping  (Result<Void, Error>) -> Void) {
+    func createUser(user: UserModel, closure: @escaping  (Result<Void, Error>) -> Void) {
         
-        authService.createUser(email: email, password: password) { [weak self] result in
+        authService.createUser(email: user.email, password: user.password) { [weak self] result in
             
             guard let self = self else { return }
             
             switch result {
             case .success:
-                self.authService.signIn(email: email, password: password) { [weak self] result in
+                self.authService.signIn(email: user.email, password: user.password) { [weak self] result in
                     
                     guard let self = self else { return }
                     
                     switch result {
                     case .success:
-                        self.userDefaultsManager.saveParams(params: [KeyesUserDefaults.email.rawValue : email, KeyesUserDefaults.password.rawValue : password])
+                        self.userDefaultsManager.saveParams(params: [KeyesUserDefaults.username.rawValue : user.username, KeyesUserDefaults.email.rawValue : user.email, KeyesUserDefaults.password.rawValue : user.password])
                         closure(.success(()))
                     case .failure(let error):
                         closure(.failure(error))

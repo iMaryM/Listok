@@ -44,7 +44,11 @@ class SignUpViewController: UIViewController {
     
     @objc
     private func createProfile() {
-        presenter?.createProfile(email: emailTextfield.text ?? "", password: passwordTextfield.text ?? "")
+        guard let username = loginTextfield.text,
+              let email = emailTextfield.text,
+              let password = passwordTextfield.text else { return }
+        
+        presenter?.createProfile(user: UserModel(username: username, email: email, password: password))
     }
 }
 

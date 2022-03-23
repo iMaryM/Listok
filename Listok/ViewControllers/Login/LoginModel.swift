@@ -11,9 +11,6 @@ class LoginModel {
     private let authService: AuthServiceProtocol
     private let userDefaultsManager = UserDefaultManager.shared
     
-    private var emailText: String?
-    private var passwordText: String?
-    
     init(authService: AuthServiceProtocol) {
         self.authService = authService
     }
@@ -36,15 +33,23 @@ class LoginModel {
     
     func getCredentials() -> UserModel {
         
+        var username = ""
+        var email = ""
+        var password = ""
+        
+        if userDefaultsManager.checkSavedParam(forKey: KeyesUserDefaults.username.rawValue) {
+            username = userDefaultsManager.getParam(forKey: KeyesUserDefaults.username.rawValue)!
+        }
+        
         if userDefaultsManager.checkSavedParam(forKey: KeyesUserDefaults.email.rawValue) {
-            emailText = userDefaultsManager.getParam(forKey: KeyesUserDefaults.email.rawValue)
+            email = userDefaultsManager.getParam(forKey: KeyesUserDefaults.email.rawValue)!
         }
         
         if userDefaultsManager.checkSavedParam(forKey: KeyesUserDefaults.password.rawValue) {
-            passwordText = UserDefaults.standard.string(forKey: KeyesUserDefaults.password.rawValue)
+            password = userDefaultsManager.getParam(forKey: KeyesUserDefaults.password.rawValue)!
         }
             
-        return UserModel(email: emailText ?? "", password: passwordText)
+        return UserModel(username: username, email: email, password: password)
     }
     
 }
