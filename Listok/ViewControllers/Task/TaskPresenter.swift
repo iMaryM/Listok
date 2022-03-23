@@ -21,7 +21,6 @@ class TaskPresenter: TaskPresenterProtocol {
     private var tasks: [ListTaskModel] = []
     private var calendarDates = [DateModel]()
 
-    
     required init(vc: TaskViewControllerProtocol) {
         self.vc = vc
     }

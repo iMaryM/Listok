@@ -104,11 +104,12 @@ private extension TaskViewController {
 //        return collectionView
         let dateScrollPicker = DateScrollPicker()
         dateScrollPicker.translatesAutoresizingMaskIntoConstraints = false
+
         var format = DateScrollPickerFormat()
 
         /// Number of days
         format.days = 7
-
+        
         /// Top label date format
         format.topDateFormat = "MMMM"
         /// Top label font
@@ -186,11 +187,14 @@ private extension TaskViewController {
 
         /// Dot view size
         format.dotWidth = 8
-        
+
         dateScrollPicker.format = format
-        dateScrollPicker.selectToday(animated: true)
+        
         dateScrollPicker.delegate = self
         dateScrollPicker.dataSource = self
+        
+        dateScrollPicker.selectToday(animated: true)
+        
         return dateScrollPicker
     }
     
@@ -309,7 +313,7 @@ private extension TaskViewController {
 
 //MARK: - setup DateScrollPicker
 extension TaskViewController: DateScrollPickerDelegate {
-    
+
 }
 
 extension TaskViewController: DateScrollPickerDataSource {
