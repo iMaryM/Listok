@@ -16,10 +16,10 @@ protocol ForgotPasswordPresenterProtocol {
 
 class ForgotPasswordPresenter: ForgotPasswordPresenterProtocol {
     
-    private var model: ForgotPasswordModel
+    private var model: ForgotPasswordModelProtocol
     weak var vc: UIViewController?
     
-    init(model: ForgotPasswordModel) {
+    init(model: ForgotPasswordModelProtocol) {
         self.model = model
     }
     

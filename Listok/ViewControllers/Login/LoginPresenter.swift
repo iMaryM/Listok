@@ -11,10 +11,10 @@ import Foundation
 class LoginPresenter {
     
     weak var vc: LoginViewController?
-    private let model: LoginModel
+    private let model: LoginModelProtocol
     private let router: LoginRouterProtocol
     
-    init(model: LoginModel, router: LoginRouterProtocol) {
+    init(model: LoginModelProtocol, router: LoginRouterProtocol) {
         self.model = model
         self.router = router
     }

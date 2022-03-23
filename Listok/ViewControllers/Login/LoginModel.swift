@@ -7,7 +7,12 @@
 
 import Foundation
 
-class LoginModel {
+protocol LoginModelProtocol {
+    func goToTaskViewController(email: String, password: String, closure: @escaping (Result<Void, Error>) -> Void)
+    func getCredentials() -> UserModel
+}
+
+class LoginModel: LoginModelProtocol {
     private let authService: AuthServiceProtocol
     private let userDefaultsManager = UserDefaultManager.shared
     

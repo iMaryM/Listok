@@ -8,7 +8,13 @@
 import Foundation
 import UIKit
 
-class ForgotPasswordModel {
+protocol ForgotPasswordModelProtocol {
+    func goToLoginViewCOntroller(_ vc: UIViewController)
+    func sendPassword(email: String, vc: UIViewController)
+    func getCredentials() -> String?
+}
+
+class ForgotPasswordModel: ForgotPasswordModelProtocol {
     
     private let authService: AuthServiceProtocol
     private let router: ForgotPasswordRouterProtocol
@@ -38,9 +44,7 @@ class ForgotPasswordModel {
     }
     
     func getCredentials() -> String? {
-    
         return userDefaultsManager.getParam(forKey: KeyesUserDefaults.email.rawValue)
-
     }
     
 }
