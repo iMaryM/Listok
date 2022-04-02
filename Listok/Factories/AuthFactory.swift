@@ -53,8 +53,8 @@ private extension AuthFactory {
     func getForgotPasswordViewController() -> UIViewController {
         let service = FireBaseAuthManager.shared
         let router = ForgotPasswordRouter()
-        let forgotPasswordModel = ForgotPasswordModel(authService: service, router: router)
-        let presenter = ForgotPasswordPresenter(model: forgotPasswordModel)
+        let forgotPasswordModel = ForgotPasswordModel(authService: service)
+        let presenter = ForgotPasswordPresenter(model: forgotPasswordModel, router: router)
         let vc = ForgotPasswordViewController()
         presenter.vc = vc
         vc.setPresenter(presenter: presenter)

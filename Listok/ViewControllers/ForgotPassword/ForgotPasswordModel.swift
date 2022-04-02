@@ -9,36 +9,30 @@ import Foundation
 import UIKit
 
 protocol ForgotPasswordModelProtocol {
-    func goToLoginViewCOntroller(_ vc: UIViewController)
-    func sendPassword(email: String, vc: UIViewController)
+    func sendPassword(email: String, closure: @escaping (Result<Void,Error>) -> ())
     func getCredentials() -> String?
 }
 
 class ForgotPasswordModel: ForgotPasswordModelProtocol {
     
     private let authService: AuthServiceProtocol
-    private let router: ForgotPasswordRouterProtocol
+
     
     private let userDefaultsManager = UserDefaultManager.shared
     
     private var emailText: String?
     
-    init(authService: AuthServiceProtocol, router: ForgotPasswordRouterProtocol) {
+    init(authService: AuthServiceProtocol) {
         self.authService = authService
-        self.router = router
     }
     
-    func goToLoginViewCOntroller(_ vc: UIViewController) {
-        router.perform(segue: .goToLogin, viewController: vc)
-    }
-    
-    func sendPassword(email: String, vc: UIViewController) {
+    func sendPassword(email: String, closure: @escaping (Result<Void,Error>) -> ()) {
         authService.sendPasswordReset(withEmail: email) { result in
             switch result {
             case .success:
-                self.router.perform(segue: .showSuccessAlert, viewController: vc)
+                closure(.success(()))
             case .failure(let error):
-                self.router.perform(segue: .showErrorAlert(error: error), viewController: vc)
+                closure(.failure(error))
             }
         }
     }

@@ -35,7 +35,7 @@ class ForgotPasswordViewController: UIViewController {
     //MARK: - actions
     @objc
     private func goToLoginViewCOntroller() {
-        presenter?.goToLoginViewCOntroller()
+        presenter?.goToLoginViewCOntroller(self)
     }
     
     @objc
