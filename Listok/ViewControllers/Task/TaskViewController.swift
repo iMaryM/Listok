@@ -8,6 +8,10 @@
 import UIKit
 import DateScrollPicker
 
+protocol TaskTableViewCellProtocol: AnyObject {
+    func showAlert(index: IndexPath)
+}
+
 protocol TaskViewControllerProtocol: AnyObject {
     func updateTaskTable()
 }
@@ -40,6 +44,14 @@ class TaskViewController: UIViewController {
         withoutTaskImageView.isHidden = !presenter.getTasks().isEmpty
         withoutTaskLabel.isHidden = !presenter.getTasks().isEmpty
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
+            guard let self = self else { return }
+            self.calendarCollectionView.selectToday(animated: false)
+        }
     }
     
     func setPresenter(_ presenter: TaskPresenterProtocol) {
@@ -104,7 +116,6 @@ private extension TaskViewController {
 //        return collectionView
         let dateScrollPicker = DateScrollPicker()
         dateScrollPicker.translatesAutoresizingMaskIntoConstraints = false
-
         var format = DateScrollPickerFormat()
 
         /// Number of days
@@ -193,7 +204,7 @@ private extension TaskViewController {
         dateScrollPicker.delegate = self
         dateScrollPicker.dataSource = self
         
-        dateScrollPicker.selectToday(animated: true)
+        //dateScrollPicker.selectToday(animated: true)
         
         return dateScrollPicker
     }
@@ -244,7 +255,6 @@ private extension TaskViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        tableView.allowsSelection = false
         return tableView
     }
     
@@ -313,7 +323,7 @@ private extension TaskViewController {
 
 //MARK: - setup DateScrollPicker
 extension TaskViewController: DateScrollPickerDelegate {
-
+    
 }
 
 extension TaskViewController: DateScrollPickerDataSource {
@@ -330,16 +340,6 @@ extension TaskViewController: UITableViewDelegate {
         return 96.0
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        let trashAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            self.presenter.deleteTask(taskIndex: indexPath.row)
-            success(true)
-        })
-        
-        return UISwipeActionsConfiguration(actions: [trashAction])
-    }
-
 }
 
 extension TaskViewController: UITableViewDataSource {
@@ -354,9 +354,15 @@ extension TaskViewController: UITableViewDataSource {
         }
 
         let task = presenter.getTasks()[indexPath.row]
-        cell.setupCell(task)
+        cell.setupCell(task, delegate: self, index: indexPath)
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
@@ -372,5 +378,18 @@ extension TaskViewController: TaskViewControllerProtocol {
         withoutTaskImageView.isHidden = !presenter.getTasks().isEmpty
         withoutTaskLabel.isHidden = !presenter.getTasks().isEmpty
         taskTableView.reloadData()
+    }
+}
+
+extension TaskViewController: TaskTableViewCellProtocol {
+    func showAlert(index: IndexPath) {
+        let alert = UIAlertController(title: "Delete", message: "Do you want delete cell?", preferredStyle: .alert)
+        let actionDelete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.presenter.deleteTask(taskIndex: index.row)
+        }
+        let actionCencel = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(actionDelete)
+        alert.addAction(actionCencel)
+        self.present(alert, animated: true, completion: nil)
     }
 }
