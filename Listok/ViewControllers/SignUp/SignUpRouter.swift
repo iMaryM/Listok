@@ -26,8 +26,8 @@ class SignUpRouter: SignUpRouterProtocol {
             let vc = AuthFactory().create(by: .login)
             viewController.navigationController?.pushViewController(vc, animated: true)
         case .goToTask:
-            let controllerFactory = TaskFactory()
-            let firstVC = controllerFactory.createTaskViewController()
+            let controllerFactory = TaskListFactory()
+            let firstVC = controllerFactory.createTaskListViewController()
             let secondVC = controllerFactory.createViewController()
             let vc = ContainerFactory().createContainer(firstViewController: firstVC, secondViewController: secondVC)
             viewController.navigationController?.pushViewController(vc, animated: true)

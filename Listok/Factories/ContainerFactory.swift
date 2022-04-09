@@ -9,38 +9,38 @@ import Foundation
 import UIKit
 
 protocol ContainerFactoryProtocol {
-    func createContainer(firstViewController: TaskViewControllerDelegate, secondViewController: UIViewController) -> ContainerViewController
+    func createContainer(firstViewController: TaskListViewControllerDelegate, secondViewController: UIViewController) -> ContainerViewController
 }
 
 class ContainerFactory: ContainerFactoryProtocol {
-    func createContainer(firstViewController: TaskViewControllerDelegate, secondViewController: UIViewController) -> ContainerViewController {
+    func createContainer(firstViewController: TaskListViewControllerDelegate, secondViewController: UIViewController) -> ContainerViewController {
         let viewController = ContainerViewController()
         viewController.setViewController(firstViewController: firstViewController, secondViewController: secondViewController)
         return viewController
     }
 }
 
-protocol TaskFactoryProtocol {
+protocol TaskListFactoryProtocol {
     func createViewController() -> UIViewController
-    func createTaskViewController() -> TaskViewControllerDelegate
+    func createTaskListViewController() -> TaskListViewControllerDelegate
 }
 
-class TaskFactory: TaskFactoryProtocol {
+class TaskListFactory: TaskListFactoryProtocol {
     func createViewController() -> UIViewController {
 
             return  getProfilleController()
     }
     
-    func createTaskViewController() -> TaskViewControllerDelegate {
-        return getTaskViewController()
+    func createTaskListViewController() -> TaskListViewControllerDelegate {
+        return getTaskListViewController()
     }
 }
 
-private extension TaskFactory {
-    func getTaskViewController() -> TaskViewController {
+private extension TaskListFactory {
+    func getTaskListViewController() -> TaskListViewController {
         
-        let vc = TaskViewController()
-        let presenter = TaskPresenter(vc: vc)
+        let vc = TaskListViewController()
+        let presenter = TaskListPresenter(vc: vc)
         vc.setPresenter(presenter)
         return vc
     }

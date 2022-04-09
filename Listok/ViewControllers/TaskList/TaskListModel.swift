@@ -1,5 +1,5 @@
 //
-//  ListTaskModel.swift
+//  TaskListModel.swift
 //  Listok
 //
 //  Created by Мария Манжос on 21.02.22.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct ListTaskModel {
+struct TaskListModel {
     var title: String
     var time: String
+    var tasks: [TaskModel] = []
 }

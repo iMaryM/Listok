@@ -2,92 +2,222 @@
 //  TaskViewController.swift
 //  Listok
 //
-//  Created by Мария Манжос on 3.02.22.
+//  Created by Мария Манжос on 18.03.22.
 //
 
 import UIKit
-import DateScrollPicker
 
 protocol TaskTableViewCellProtocol: AnyObject {
-    func showAlert(index: IndexPath)
-}
-
-protocol TaskViewControllerProtocol: AnyObject {
-    func updateTaskTable()
-}
-
-protocol TaskViewControllerDelegate: UIViewController {
-    func addTask(task: ListTaskModel)
+    func updateTask(task: TaskModel, index: IndexPath)
 }
 
 class TaskViewController: UIViewController {
     
     //MARK: - property
-    private lazy var taskLabel = createTaskLabel()
+    private lazy var detailLabel = createDetailLabel()
+    private lazy var backButton = createBackButton()
+    private lazy var nameOfTaskTextField = createNameOfTaskTextField()
+    private lazy var editButton = createEditButton()
+    private lazy var checkButton = createCheckButton()
+    private lazy var closeButton = createCloseButton()
+    private lazy var dateNameLabel = createDateNameLabel()
     private lazy var dateLabel = createDateLabel()
-    private lazy var calendarCollectionView = createcalendarCollectionView()
-    private lazy var todayLabel = createTodayLabel()
-    private lazy var withoutTaskImageView = createWithoutTaskImageView()
-    private lazy var withoutTaskLabel = createWithoutTaskLabel()
+    private lazy var dateView = createDateView()
+    private lazy var timeNameLabel = createTimeNameLabel()
+    private lazy var timeLabel = createTimeLabel()
+    private lazy var timeView = createTimeView()
+    private lazy var timeStackView = createTimeStackView()
+    private lazy var taskLabel = createTaskLabel()
     private lazy var taskTableView = createTaskTableView()
-    
+    private lazy var addTaskButton = createAddTaskButton()
+
     private var presenter: TaskPresenterProtocol!
     
-    //private var addTaskViewController: AddTaskViewController()
+    var closure: (([TaskModel]) -> ())?
     
-    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareUI()
-
-        withoutTaskImageView.isHidden = !presenter.getTasks().isEmpty
-        withoutTaskLabel.isHidden = !presenter.getTasks().isEmpty
-        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
-            guard let self = self else { return }
-            self.calendarCollectionView.selectToday(animated: false)
-        }
-    }
-    
-    func setPresenter(_ presenter: TaskPresenterProtocol) {
+    func setPresenter(presenter: TaskPresenterProtocol) {
         self.presenter = presenter
+    }
+    
+    func getPresenter() -> TaskPresenterProtocol? {
+        return self.presenter
+    }
+    
+    func updateTaskTable() {
+        taskTableView.reloadData()
+    }
+    
+    //MARK: - actions
+    @objc
+    func editNameOfTask() {
+        nameOfTaskTextField.isEnabled = true
+        nameOfTaskTextField.borderStyle = .roundedRect
+        editButton.isHidden = true
+        checkButton.isHidden = false
+        closeButton.isHidden = false
+    }
+    
+    @objc
+    func saveNameOfTask() {
+        nameOfTaskTextField.isEnabled = false
+        nameOfTaskTextField.borderStyle = .none
+        editButton.isHidden = false
+        checkButton.isHidden = true
+        closeButton.isHidden = true
+    }
+    
+    @objc
+    func cancelNameOfTask() {
+        nameOfTaskTextField.isEnabled = false
+        nameOfTaskTextField.borderStyle = .none
+        editButton.isHidden = false
+        checkButton.isHidden = true
+        closeButton.isHidden = true
+    }
+    
+    @objc
+    func backToTaskViewController() {
+        let tasks = presenter.getTasks()
+        closure?(tasks)
+        presenter.goToTaskList()
+    }
+    
+    @objc
+    func showAddAlert() {
+        let alert = UIAlertController(title: "Add new task", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let addAction = UIAlertAction(title: "Add", style: .default) { _ in
+            guard let task = alert.textFields?.first?.text else { return }
+            self.presenter.addTask(task: TaskModel(task: task))
+            self.taskTableView.reloadData()
+        }
+        alert.addTextField()
+        alert.addAction(cancelAction)
+        alert.addAction(addAction)
+        present(alert, animated: true)
     }
     
 }
 
 //MARK: - prepare UI
-private extension TaskViewController {
+extension TaskViewController {
     
-    func prepareUI() {
+    func prepareUI () {
         view.backgroundColor = .white
+        view.addSubview(detailLabel)
+        view.addSubview(backButton)
+        view.addSubview(nameOfTaskTextField)
+        view.addSubview(editButton)
+        view.addSubview(checkButton)
+        view.addSubview(closeButton)
+        view.addSubview(timeStackView)
         view.addSubview(taskLabel)
-        view.addSubview(dateLabel)
-        view.addSubview(calendarCollectionView)
-        view.addSubview(todayLabel)
         view.addSubview(taskTableView)
-        view.addSubview(withoutTaskImageView)
-        view.addSubview(withoutTaskLabel)
-        pinTaskLabel()
+        view.addSubview(addTaskButton)
+
+        pinDetailLabel()
+        pinBackButton()
+        pinNameOfTaskLabel()
+        pinDateNameLabel()
+        pinEditButton()
+        pinCheckButton()
+        pinCloseButton()
         pinDateLabel()
-        pinCalendarCollectionView()
-        pinTodayLabel()
+        pinTimeNameLabel()
+        pinTimeLabel()
+        pinTimeStackView()
+        pinTaskLabel()
         pinTaskTableView()
-        pinWithoutTaskImageView()
-        pinWithoutTaskLabel()
+        pinAddTaskButton()
     }
     
-    func createTaskLabel() -> UILabel {
+    func createDetailLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        let string = "Task"
+        let string = "Detail"
         let attrs: [NSAttributedString.Key : Any] = [
-            .font : UIFont(name: "Roboto-Bold", size: 28) ?? UIFont.systemFont(ofSize: 28),
+            .font : UIFont(name: "Roboto-Bold", size: 21) ?? UIFont.systemFont(ofSize: 21),
             .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
+        ]
+        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        label.attributedText = attributedString
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        return label
+    }
+    
+    func createBackButton() -> UIButton {
+        let button = UIButton()
+        let image = UIImage(named: "chevron_left")
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(backToTaskViewController), for: .touchUpInside)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 16
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowRadius = 8
+        button.layer.shadowOffset = CGSize(width: 8, height: 8)
+        button.layer.shadowOpacity = 0.4
+        return button
+    }
+    
+    func createNameOfTaskTextField() -> UITextField {
+        let nameTextField = UITextField()
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        let string = "Name of task"
+        let attrs: [NSAttributedString.Key : Any] = [
+            .font : UIFont(name: "Roboto-Bold", size: 27) ?? UIFont.systemFont(ofSize: 27),
+            .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
+        ]
+        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        nameTextField.attributedText = attributedString
+        nameTextField.textAlignment = .left
+        nameTextField.isEnabled = false
+        return nameTextField
+    }
+    
+    func createEditButton() -> UIButton {
+        let button = UIButton()
+        let image = UIImage(named: "pencil")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(editNameOfTask), for: .touchUpInside)
+        return button
+    }
+    
+    func createCheckButton() -> UIButton {
+        let button = UIButton()
+        let image = UIImage(named: "checkmark")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(saveNameOfTask), for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }
+    
+    func createCloseButton() -> UIButton {
+        let button = UIButton()
+        let image = UIImage(named: "xmark")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(cancelNameOfTask), for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }
+    
+    func createDateNameLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let string = "Est. Date"
+        let attrs: [NSAttributedString.Key : Any] = [
+            .font : UIFont(name: "Roboto-Medium", size: 21) ?? UIFont.systemFont(ofSize: 21),
+            .foregroundColor : UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.5)
         ]
         let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
         label.attributedText = attributedString
@@ -99,123 +229,10 @@ private extension TaskViewController {
     func createDateLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.attributedText = Date().getAttributedStringDate()
-        label.textAlignment = .left
-        label.numberOfLines = 2
-        return label
-    }
-    
-    func createcalendarCollectionView() -> DateScrollPicker {
-//        let flowLayout = UICollectionViewFlowLayout()
-//        flowLayout.scrollDirection = .horizontal
-//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        collectionView.register(UINib(nibName: "CalendarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CalendarCollectionViewCell")
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//        return collectionView
-        let dateScrollPicker = DateScrollPicker()
-        dateScrollPicker.translatesAutoresizingMaskIntoConstraints = false
-        var format = DateScrollPickerFormat()
-
-        /// Number of days
-        format.days = 7
-        
-        /// Top label date format
-        format.topDateFormat = "MMMM"
-        /// Top label font
-        format.topFont = UIFont(name: "Roboto-Regular", size: 9) ?? UIFont.systemFont(ofSize: 9)
-        /// Top label text color
-        format.topTextColor = UIColor(red: 16 / 255, green: 38 / 255, blue: 90 / 255, alpha: 1)
-        /// Top label selected text color
-        format.topTextSelectedColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
-
-        // Medium label date format
-        format.mediumDateFormat = "dd"
-        /// Medium label font
-        format.mediumFont = UIFont(name: "Roboto-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15)
-        /// Medium label text color
-        format.mediumTextColor = UIColor(red: 16 / 255, green: 38 / 255, blue: 90 / 255, alpha: 1)
-        /// Medium label selected text color
-        format.mediumTextSelectedColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.4)
-        
-        /// Bottom label date format
-        format.bottomDateFormat = "EEE"
-        /// Bottom label font
-        format.bottomFont = UIFont(name: "Roboto-Regular", size: 9) ?? UIFont.systemFont(ofSize: 9)
-        /// Bottom label text color
-        format.bottomTextColor = UIColor(red: 16 / 255, green: 38 / 255, blue: 90 / 255, alpha: 1)
-        /// Bottom label selected text color
-        format.bottomTextSelectedColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
-
-        /// Day radius
-        format.dayRadius = 12
-
-        /// Day background color
-        format.dayBackgroundColor = .clear
-
-        /// Day background selected color
-        format.dayBackgroundSelectedColor = UIColor(red: 92 / 255, green: 101 / 254, blue: 202 / 255, alpha: 1)
-
-        /// Selection animation
-        format.animatedSelection = true
-
-        /// Separator enabled
-        format.separatorEnabled = true
-
-        /// Separator top label date format
-        format.separatorTopDateFormat = "MMM"
-
-        /// Separator top label font
-        format.separatorTopFont = UIFont.systemFont(ofSize: 4, weight: .bold)
-
-        /// Separator top label text color
-        format.separatorTopTextColor = UIColor.black
-
-        /// Separator bottom label date format
-        format.separatorBottomDateFormat = "yyyy"
-
-        /// Separator bottom label font
-        format.separatorBottomFont = UIFont.systemFont(ofSize: 4, weight: .regular)
-
-        /// Separator bottom label text color
-        format.separatorBottomTextColor = UIColor.black
-
-        /// Separator background color
-        format.separatorBackgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
-
-        /// Fade enabled
-        format.fadeEnabled = false
-
-//        /// Animation scale factor
-//        format.animationScaleFactor = 1.1
-
-        /// Animation scale factor
-        format.dayPadding = 4
-
-        /// Top margin data label
-        format.topMarginData = 8
-
-        /// Dot view size
-        format.dotWidth = 8
-
-        dateScrollPicker.format = format
-        
-        dateScrollPicker.delegate = self
-        dateScrollPicker.dataSource = self
-        
-        //dateScrollPicker.selectToday(animated: true)
-        
-        return dateScrollPicker
-    }
-    
-    func createTodayLabel() -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let string = "Today"
+        let string = "4 march 2022"
         let attrs: [NSAttributedString.Key : Any] = [
-            .font : UIFont(name: "Roboto-Medium", size: 24) ?? UIFont.systemFont(ofSize: 24),
-            .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
+            .font : UIFont(name: "Roboto-Medium", size: 21) ?? UIFont.systemFont(ofSize: 21),
+            .foregroundColor : UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
         ]
         let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
         label.attributedText = attributedString
@@ -224,26 +241,79 @@ private extension TaskViewController {
         return label
     }
     
-    func createWithoutTaskImageView() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "withoutTask")
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+    func createDateView() -> UIView {
+        let dateView = UIView()
+        dateView.translatesAutoresizingMaskIntoConstraints = false
+        dateView.backgroundColor = UIColor(red: 218/255, green: 131/255, blue: 129/255, alpha: 1)
+        dateView.layer.cornerRadius = 12
+        dateView.addSubview(dateNameLabel)
+        dateView.addSubview(dateLabel)
+        return dateView
     }
     
-    func createWithoutTaskLabel() -> UILabel {
+    func createTimeNameLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        let string = "You don’t have any schedule today.\n Tap the plus button to create new to-do."
+        let string = "Est. Time"
         let attrs: [NSAttributedString.Key : Any] = [
-            .font : UIFont(name: "Roboto-Medium", size: 12) ?? UIFont.systemFont(ofSize: 12),
-            .foregroundColor : UIColor(red: 87 / 255, green: 87 / 254, blue: 87 / 255, alpha: 1)
+            .font : UIFont(name: "Roboto-Medium", size: 21) ?? UIFont.systemFont(ofSize: 21),
+            .foregroundColor : UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.5)
         ]
         let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
         label.attributedText = attributedString
-        label.textAlignment = .center
-        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        return label
+    }
+    
+    func createTimeLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let string = "07:00 - 07:30"
+        let attrs: [NSAttributedString.Key : Any] = [
+            .font : UIFont(name: "Roboto-Medium", size: 21) ?? UIFont.systemFont(ofSize: 21),
+            .foregroundColor : UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
+        ]
+        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        label.attributedText = attributedString
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        return label
+    }
+    
+    func createTimeView() -> UIView {
+        let timeView = UIView()
+        timeView.translatesAutoresizingMaskIntoConstraints = false
+        timeView.addSubview(timeNameLabel)
+        timeView.addSubview(timeLabel)
+        timeView.backgroundColor = UIColor(red: 218/255, green: 131/255, blue: 129/255, alpha: 1)
+        timeView.layer.cornerRadius = 12
+        return timeView
+    }
+    
+    func createTimeStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(dateView)
+        stackView.addArrangedSubview(timeView)
+        stackView.spacing = 16
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        return stackView
+    }
+    
+    func createTaskLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let string = "Task"
+        let attrs: [NSAttributedString.Key : Any] = [
+            .font : UIFont(name: "Roboto-Bold", size: 21) ?? UIFont.systemFont(ofSize: 21),
+            .foregroundColor : UIColor(red: 16 / 255, green: 39 / 254, blue: 90 / 255, alpha: 1)
+        ]
+        let attributedString = NSMutableAttributedString(string: string, attributes: attrs)
+        label.attributedText = attributedString
+        label.textAlignment = .left
+        label.numberOfLines = 1
         return label
     }
     
@@ -258,138 +328,158 @@ private extension TaskViewController {
         return tableView
     }
     
-    func pinTaskLabel() {
-        let heightStatusBar = UIApplication.shared.statusBarFrame.size.height
-        
+    func createAddTaskButton() -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(red: 114/255, green: 121/255, blue: 206/255, alpha: 1)
+        button.layer.cornerRadius = 25
+        button.setTitle("+", for: .normal)
+        button.addTarget(self, action: #selector(showAddAlert), for: .touchUpInside)
+        return button
+    }
+    
+    func pinDetailLabel() {
         NSLayoutConstraint.activate([
-            taskLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: heightStatusBar),
-            taskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
-            taskLabel.heightAnchor.constraint(equalToConstant: 48)
+            detailLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
+            detailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    func pinBackButton() {
+        NSLayoutConstraint.activate([
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 48),
+            backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            backButton.heightAnchor.constraint(equalToConstant: 48),
+            backButton.widthAnchor.constraint(equalToConstant: 48)
+        ])
+    }
+    
+    func pinNameOfTaskLabel() {
+        NSLayoutConstraint.activate([
+            nameOfTaskTextField.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 32),
+            nameOfTaskTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24)
+        ])
+    }
+    
+    func pinEditButton() {
+        NSLayoutConstraint.activate([
+            editButton.topAnchor.constraint(equalTo: nameOfTaskTextField.topAnchor),
+            editButton.bottomAnchor.constraint(equalTo: nameOfTaskTextField.bottomAnchor),
+            editButton.leftAnchor.constraint(equalTo: nameOfTaskTextField.rightAnchor, constant: 8),
+            editButton.widthAnchor.constraint(equalTo: editButton.heightAnchor)
+        ])
+    }
+    
+    func pinCheckButton() {
+        NSLayoutConstraint.activate([
+        checkButton.topAnchor.constraint(equalTo: nameOfTaskTextField.topAnchor),
+        checkButton.bottomAnchor.constraint(equalTo: nameOfTaskTextField.bottomAnchor),
+        checkButton.leftAnchor.constraint(equalTo: nameOfTaskTextField.rightAnchor, constant: 8),
+        checkButton.widthAnchor.constraint(equalTo: checkButton.heightAnchor)
+        ])
+    }
+    
+    func pinCloseButton() {
+        NSLayoutConstraint.activate([
+        closeButton.topAnchor.constraint(equalTo: checkButton.topAnchor),
+        closeButton.bottomAnchor.constraint(equalTo: checkButton.bottomAnchor),
+        closeButton.leftAnchor.constraint(equalTo: checkButton.rightAnchor, constant: 8),
+        closeButton.widthAnchor.constraint(equalTo: closeButton.heightAnchor)
+        ])
+    }
+    
+    func pinDateNameLabel() {
+        NSLayoutConstraint.activate([
+            dateNameLabel.topAnchor.constraint(equalTo: dateView.topAnchor, constant: 16),
+            dateNameLabel.leftAnchor.constraint(equalTo: dateView.leftAnchor, constant: 16),
+            dateNameLabel.rightAnchor.constraint(equalTo: dateView.rightAnchor, constant: -16)
         ])
     }
     
     func pinDateLabel() {
         NSLayoutConstraint.activate([
-            dateLabel.centerYAnchor.constraint(equalTo: taskLabel.centerYAnchor),
-            dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24)
+            dateLabel.topAnchor.constraint(equalTo: dateNameLabel.bottomAnchor, constant: 4),
+            dateLabel.leftAnchor.constraint(equalTo: dateView.leftAnchor, constant: 16),
+            dateLabel.rightAnchor.constraint(equalTo: dateView.rightAnchor, constant: -16)
         ])
     }
     
-    func pinCalendarCollectionView() {
+    func pinTimeNameLabel() {
         NSLayoutConstraint.activate([
-            calendarCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
-            calendarCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
-            calendarCollectionView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 16),
-            calendarCollectionView.heightAnchor.constraint(equalToConstant: 80)
+            timeNameLabel.topAnchor.constraint(equalTo: timeView.topAnchor, constant: 16),
+            timeNameLabel.leftAnchor.constraint(equalTo: timeView.leftAnchor, constant: 16),
+            timeNameLabel.rightAnchor.constraint(equalTo: timeView.rightAnchor, constant: -16)
         ])
     }
     
-    func pinTodayLabel() {
+    func pinTimeLabel() {
         NSLayoutConstraint.activate([
-            todayLabel.topAnchor.constraint(equalTo: calendarCollectionView.bottomAnchor, constant: 16),
-            todayLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
-            todayLabel.heightAnchor.constraint(equalToConstant: 48)
+            timeLabel.topAnchor.constraint(equalTo: timeNameLabel.bottomAnchor, constant: 4),
+            timeLabel.leftAnchor.constraint(equalTo: timeView.leftAnchor, constant: 16),
+            timeLabel.rightAnchor.constraint(equalTo: timeView.rightAnchor, constant: -16)
         ])
     }
     
-    func pinWithoutTaskImageView() {
+    func pinTimeStackView() {
         NSLayoutConstraint.activate([
-            withoutTaskImageView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 16),
-            withoutTaskImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            withoutTaskImageView.heightAnchor.constraint(equalToConstant: 150),
-            withoutTaskImageView.widthAnchor.constraint(equalToConstant: 150)
+            timeStackView.topAnchor.constraint(equalTo: nameOfTaskTextField.bottomAnchor,constant: 32),
+            timeStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            timeStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
+            timeStackView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
-    func pinWithoutTaskLabel() {
+    func pinTaskLabel() {
         NSLayoutConstraint.activate([
-            withoutTaskLabel.topAnchor.constraint(equalTo: withoutTaskImageView.bottomAnchor, constant: 24),
-            withoutTaskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 64),
-            withoutTaskLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64),
-            withoutTaskLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -116)
+            taskLabel.topAnchor.constraint(equalTo: timeStackView.bottomAnchor, constant: 32),
+            taskLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            taskLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24)
         ])
     }
     
     func pinTaskTableView() {
         NSLayoutConstraint.activate([
-            taskTableView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 16),
+            taskTableView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 16),
             taskTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
             taskTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
-            taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32)
+            taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24)
+        ])
+    }
+    
+    func pinAddTaskButton() {
+        NSLayoutConstraint.activate([
+            addTaskButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
+            addTaskButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
+            addTaskButton.widthAnchor.constraint(equalToConstant: 50),
+            addTaskButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
 }
 
-//MARK: - setup DateScrollPicker
-extension TaskViewController: DateScrollPickerDelegate {
-    
-}
-
-extension TaskViewController: DateScrollPickerDataSource {
-    // Returns custom color for dot view
-    func dateScrollPicker(_ dateScrollPicker: DateScrollPicker, dotColorByDate date: Date) -> UIColor? {
-        return UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.7)
-    }
-}
-
-//MARK: - setup TableView
+//MARK: - setup tableView
 extension TaskViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 96.0
-    }
     
 }
 
 extension TaskViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.getTasks().count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell") as? TaskTableViewCell else {
             return UITableViewCell()
         }
-
-        let task = presenter.getTasks()[indexPath.row]
-        cell.setupCell(task, delegate: self, index: indexPath)
-
+        
+        cell.setup(task: presenter.getTasks()[indexPath.row], delegate: self, index: indexPath)
+        
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-}
-
-extension TaskViewController: TaskViewControllerDelegate {
-    func addTask(task: ListTaskModel) {
-        presenter.addTask(task: task)
-    }
-}
-
-extension TaskViewController: TaskViewControllerProtocol {
-    func updateTaskTable() {
-        withoutTaskImageView.isHidden = !presenter.getTasks().isEmpty
-        withoutTaskLabel.isHidden = !presenter.getTasks().isEmpty
-        taskTableView.reloadData()
     }
 }
 
 extension TaskViewController: TaskTableViewCellProtocol {
-    func showAlert(index: IndexPath) {
-        let alert = UIAlertController(title: "Delete", message: "Do you want delete cell?", preferredStyle: .alert)
-        let actionDelete = UIAlertAction(title: "Delete", style: .destructive) { _ in
-            self.presenter.deleteTask(taskIndex: index.row)
-        }
-        let actionCencel = UIAlertAction(title: "Cancel", style: .cancel)
-        alert.addAction(actionDelete)
-        alert.addAction(actionCencel)
-        self.present(alert, animated: true, completion: nil)
+    func updateTask(task: TaskModel, index: IndexPath) {
+        self.presenter.updateTask(task: task, taskIndex: index.row)
     }
 }

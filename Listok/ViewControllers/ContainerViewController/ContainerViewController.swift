@@ -15,7 +15,7 @@ class ContainerViewController: UIViewController {
     private lazy var addTaskButton = createAddTaskButton()
     private lazy var profileButton = createProfileButton()
     
-    private var firstViewController: TaskViewControllerDelegate?
+    private var firstViewController: TaskListViewControllerDelegate?
     private var secondViewController: UIViewController?
     
     //MARK: - lifecycle
@@ -42,18 +42,18 @@ class ContainerViewController: UIViewController {
     
     @objc
     private func moveToAddViewController() {
-        let vc = AddTaskViewController()
+        let vc = AddTaskListViewController()
 
-        vc.closure = { [weak self] task in
+        vc.closure = { [weak self] taskList in
             guard let self = self,
                   let firstViewController = self.firstViewController else { return }
-            firstViewController.addTask(task: task)
+            firstViewController.addTaskList(taskList: taskList)
         }
         
         present(vc, animated: true, completion: nil)
     }
     
-    func setViewController(firstViewController: TaskViewControllerDelegate, secondViewController: UIViewController) {
+    func setViewController(firstViewController: TaskListViewControllerDelegate, secondViewController: UIViewController) {
         self.firstViewController = firstViewController
         self.secondViewController = secondViewController
     }

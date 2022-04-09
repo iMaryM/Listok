@@ -13,7 +13,7 @@
 		8413A45727A59E0E00520CA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8413A45527A59E0E00520CA4 /* Main.storyboard */; };
 		8413A45927A59E0F00520CA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8413A45827A59E0F00520CA4 /* Assets.xcassets */; };
 		8413A45C27A59E0F00520CA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8413A45A27A59E0F00520CA4 /* LaunchScreen.storyboard */; };
-		842324DB27E4B200007A4CDA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842324DA27E4B200007A4CDA /* DetailViewController.swift */; };
+		842324DB27E4B200007A4CDA /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842324DA27E4B200007A4CDA /* TaskViewController.swift */; };
 		842324DD27E4BE69007A4CDA /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842324DC27E4BE69007A4CDA /* SignUpModel.swift */; };
 		842324DF27E4C791007A4CDA /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842324DE27E4C791007A4CDA /* LoginPresenter.swift */; };
 		842324E127E4CCE0007A4CDA /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842324E027E4CCE0007A4CDA /* LoginModel.swift */; };
@@ -22,18 +22,22 @@
 		842324E727EB8877007A4CDA /* ForgotPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842324E627EB8877007A4CDA /* ForgotPasswordModel.swift */; };
 		84310ED927A8464400E972E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310ED827A8464400E972E4 /* LoginViewController.swift */; };
 		84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84310EDA27A8467800E972E4 /* SignUpViewController.swift */; };
-		8437728E27C3A84500DA3B5A /* ListTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8437728D27C3A84500DA3B5A /* ListTaskModel.swift */; };
-		8437729127C502C600DA3B5A /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8437729027C502C600DA3B5A /* AddTaskViewController.swift */; };
+		8437728E27C3A84500DA3B5A /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8437728D27C3A84500DA3B5A /* TaskListModel.swift */; };
+		8437729127C502C600DA3B5A /* AddTaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8437729027C502C600DA3B5A /* AddTaskListViewController.swift */; };
 		8448524B27BD52AB0069C61C /* ForgotPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524A27BD52AB0069C61C /* ForgotPasswordRouter.swift */; };
 		8448524D27BD56190069C61C /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524C27BD56190069C61C /* ProfileRouter.swift */; };
 		8448524F27BE93F90069C61C /* ContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448524E27BE93F90069C61C /* ContainerFactory.swift */; };
-		8448525327BEAFF50069C61C /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448525127BEAFF50069C61C /* TaskTableViewCell.swift */; };
-		8448525427BEAFF50069C61C /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8448525227BEAFF50069C61C /* TaskTableViewCell.xib */; };
+		8448525327BEAFF50069C61C /* TaskListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448525127BEAFF50069C61C /* TaskListTableViewCell.swift */; };
+		8448525427BEAFF50069C61C /* TaskListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8448525227BEAFF50069C61C /* TaskListTableViewCell.xib */; };
 		844BF43727B544FD004CEC6C /* KyesForUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */; };
+		8467A8AB27F854D200AC25BA /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467A8AA27F854D200AC25BA /* TaskModel.swift */; };
+		8467A8B027F85C0A00AC25BA /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467A8AE27F85C0A00AC25BA /* TaskTableViewCell.swift */; };
+		8467A8B127F85C0A00AC25BA /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8467A8AF27F85C0A00AC25BA /* TaskTableViewCell.xib */; };
+		8467A8B327F8AE1600AC25BA /* TaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467A8B227F8AE1600AC25BA /* TaskPresenter.swift */; };
+		8467A8B527F8AF7B00AC25BA /* TaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467A8B427F8AF7B00AC25BA /* TaskRouter.swift */; };
+		8467A8B727FB573400AC25BA /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467A8B627FB573400AC25BA /* TaskFactory.swift */; };
 		8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */; };
 		848E06D627B26A8000237CC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848E06D527B26A8000237CC2 /* GoogleService-Info.plist */; };
-		848E06DA27B28FB500237CC2 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E06D827B28FB500237CC2 /* CalendarCollectionViewCell.swift */; };
-		848E06DB27B28FB500237CC2 /* CalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848E06D927B28FB500237CC2 /* CalendarCollectionViewCell.xib */; };
 		848E06DD27B2ECDC00237CC2 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848E06DC27B2ECDC00237CC2 /* Roboto-Medium.ttf */; };
 		848E30FE27B6AB9600A08014 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E30FD27B6AB9600A08014 /* SplashRouter.swift */; };
 		848E310127B6B06400A08014 /* AuthFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E310027B6B06400A08014 /* AuthFactory.swift */; };
@@ -45,9 +49,9 @@
 		84A9543027C6152500E1AFBA /* Sequence+DateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9542F27C6152500E1AFBA /* Sequence+DateGenerator.swift */; };
 		84B2038827E10F1B00831799 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2038727E10F1B00831799 /* SignUpPresenter.swift */; };
 		84D7066527AC34B300D9B874 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */; };
-		84D7066A27AC4E3E00D9B874 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066927AC4E3E00D9B874 /* TaskViewController.swift */; };
+		84D7066A27AC4E3E00D9B874 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7066927AC4E3E00D9B874 /* TaskListViewController.swift */; };
 		84DB37C427B5A6250028F6CA /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB37C327B5A6250028F6CA /* ContainerViewController.swift */; };
-		84E98AB027BFE544003D1C6B /* TaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E98AAF27BFE544003D1C6B /* TaskPresenter.swift */; };
+		84E98AB027BFE544003D1C6B /* TaskListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E98AAF27BFE544003D1C6B /* TaskListPresenter.swift */; };
 		84ED1F5F27AD52B9003D83B0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED1F5E27AD52B9003D83B0 /* ProfileViewController.swift */; };
 		84ED1F6227AD5915003D83B0 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED1F6127AD5915003D83B0 /* UserModel.swift */; };
 		84F4BA7127AADB51009A58A5 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */; };
@@ -66,7 +70,7 @@
 		8413A45827A59E0F00520CA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8413A45B27A59E0F00520CA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8413A45D27A59E0F00520CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		842324DA27E4B200007A4CDA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		842324DA27E4B200007A4CDA /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		842324DC27E4BE69007A4CDA /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		842324DE27E4C791007A4CDA /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		842324E027E4CCE0007A4CDA /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -75,18 +79,22 @@
 		842324E627EB8877007A4CDA /* ForgotPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModel.swift; sourceTree = "<group>"; };
 		84310ED827A8464400E972E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84310EDA27A8467800E972E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		8437728D27C3A84500DA3B5A /* ListTaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTaskModel.swift; sourceTree = "<group>"; };
-		8437729027C502C600DA3B5A /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		8437728D27C3A84500DA3B5A /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
+		8437729027C502C600DA3B5A /* AddTaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskListViewController.swift; sourceTree = "<group>"; };
 		8448524A27BD52AB0069C61C /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
 		8448524C27BD56190069C61C /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		8448524E27BE93F90069C61C /* ContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerFactory.swift; sourceTree = "<group>"; };
-		8448525127BEAFF50069C61C /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
-		8448525227BEAFF50069C61C /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
+		8448525127BEAFF50069C61C /* TaskListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListTableViewCell.swift; sourceTree = "<group>"; };
+		8448525227BEAFF50069C61C /* TaskListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListTableViewCell.xib; sourceTree = "<group>"; };
 		844BF43627B544FD004CEC6C /* KyesForUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyesForUserDefaults.swift; sourceTree = "<group>"; };
+		8467A8AA27F854D200AC25BA /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		8467A8AE27F85C0A00AC25BA /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		8467A8AF27F85C0A00AC25BA /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
+		8467A8B227F8AE1600AC25BA /* TaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPresenter.swift; sourceTree = "<group>"; };
+		8467A8B427F8AF7B00AC25BA /* TaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRouter.swift; sourceTree = "<group>"; };
+		8467A8B627FB573400AC25BA /* TaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFactory.swift; sourceTree = "<group>"; };
 		8469CC8B27A7C89D00F3CA54 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		848E06D527B26A8000237CC2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		848E06D827B28FB500237CC2 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
-		848E06D927B28FB500237CC2 /* CalendarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCollectionViewCell.xib; sourceTree = "<group>"; };
 		848E06DC27B2ECDC00237CC2 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		848E30FD27B6AB9600A08014 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		848E310027B6B06400A08014 /* AuthFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFactory.swift; sourceTree = "<group>"; };
@@ -98,9 +106,9 @@
 		84A9542F27C6152500E1AFBA /* Sequence+DateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+DateGenerator.swift"; sourceTree = "<group>"; };
 		84B2038727E10F1B00831799 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		84D7066427AC34B300D9B874 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
-		84D7066927AC4E3E00D9B874 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		84D7066927AC4E3E00D9B874 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		84DB37C327B5A6250028F6CA /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
-		84E98AAF27BFE544003D1C6B /* TaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPresenter.swift; sourceTree = "<group>"; };
+		84E98AAF27BFE544003D1C6B /* TaskListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPresenter.swift; sourceTree = "<group>"; };
 		84ED1F5E27AD52B9003D83B0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		84ED1F6127AD5915003D83B0 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		84F4BA7027AADB51009A58A5 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -201,27 +209,40 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		842324D927E4AEB5007A4CDA /* Detail */ = {
+		842324D927E4AEB5007A4CDA /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				842324DA27E4B200007A4CDA /* DetailViewController.swift */,
+				8467A8AD27F85BDF00AC25BA /* TaskTableViewCell */,
+				842324DA27E4B200007A4CDA /* TaskViewController.swift */,
+				8467A8B227F8AE1600AC25BA /* TaskPresenter.swift */,
+				8467A8AA27F854D200AC25BA /* TaskModel.swift */,
+				8467A8B427F8AF7B00AC25BA /* TaskRouter.swift */,
 			);
-			path = Detail;
+			path = Task;
 			sourceTree = "<group>";
 		};
-		8437728F27C5029B00DA3B5A /* AddTaskViewController */ = {
+		8437728F27C5029B00DA3B5A /* AddTaskListViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8437729027C502C600DA3B5A /* AddTaskViewController.swift */,
+				8437729027C502C600DA3B5A /* AddTaskListViewController.swift */,
 			);
-			path = AddTaskViewController;
+			path = AddTaskListViewController;
 			sourceTree = "<group>";
 		};
-		8448525027BEAFC90069C61C /* TaskTableViewCell */ = {
+		8448525027BEAFC90069C61C /* TaskListTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				8448525127BEAFF50069C61C /* TaskTableViewCell.swift */,
-				8448525227BEAFF50069C61C /* TaskTableViewCell.xib */,
+				8448525127BEAFF50069C61C /* TaskListTableViewCell.swift */,
+				8448525227BEAFF50069C61C /* TaskListTableViewCell.xib */,
+			);
+			path = TaskListTableViewCell;
+			sourceTree = "<group>";
+		};
+		8467A8AD27F85BDF00AC25BA /* TaskTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8467A8AE27F85C0A00AC25BA /* TaskTableViewCell.swift */,
+				8467A8AF27F85C0A00AC25BA /* TaskTableViewCell.xib */,
 			);
 			path = TaskTableViewCell;
 			sourceTree = "<group>";
@@ -236,20 +257,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				848E06D827B28FB500237CC2 /* CalendarCollectionViewCell.swift */,
-				848E06D927B28FB500237CC2 /* CalendarCollectionViewCell.xib */,
-			);
-			path = CalendarCollectionViewCell;
-			sourceTree = "<group>";
-		};
 		848E30FF27B6B03100A08014 /* Factories */ = {
 			isa = PBXGroup;
 			children = (
 				848E310027B6B06400A08014 /* AuthFactory.swift */,
 				8448524E27BE93F90069C61C /* ContainerFactory.swift */,
+				8467A8B627FB573400AC25BA /* TaskFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -266,14 +279,14 @@
 		848E310B27BBB3D300A08014 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				842324D927E4AEB5007A4CDA /* Detail */,
-				8437728F27C5029B00DA3B5A /* AddTaskViewController */,
+				842324D927E4AEB5007A4CDA /* Task */,
+				8437728F27C5029B00DA3B5A /* AddTaskListViewController */,
 				8421A34227A86BA1006ED768 /* Splash */,
 				8407FB6327A86DA5007CF632 /* SignUp */,
 				8407FB6227A86D96007CF632 /* Login */,
 				84F4BA7227AAFB55009A58A5 /* ForgotPassword */,
 				84DB37C227B5A5FE0028F6CA /* ContainerViewController */,
-				84D7066827AC4E1800D9B874 /* Task */,
+				84D7066827AC4E1800D9B874 /* TaskList */,
 				84ED1F5D27AD52A4003D83B0 /* Profile */,
 			);
 			path = ViewControllers;
@@ -287,16 +300,15 @@
 			path = FireBase;
 			sourceTree = "<group>";
 		};
-		84D7066827AC4E1800D9B874 /* Task */ = {
+		84D7066827AC4E1800D9B874 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
-				848E06D727B28F8700237CC2 /* CalendarCollectionViewCell */,
-				8448525027BEAFC90069C61C /* TaskTableViewCell */,
-				84D7066927AC4E3E00D9B874 /* TaskViewController.swift */,
-				84E98AAF27BFE544003D1C6B /* TaskPresenter.swift */,
-				8437728D27C3A84500DA3B5A /* ListTaskModel.swift */,
+				8448525027BEAFC90069C61C /* TaskListTableViewCell */,
+				84D7066927AC4E3E00D9B874 /* TaskListViewController.swift */,
+				84E98AAF27BFE544003D1C6B /* TaskListPresenter.swift */,
+				8437728D27C3A84500DA3B5A /* TaskListModel.swift */,
 			);
-			path = Task;
+			path = TaskList;
 			sourceTree = "<group>";
 		};
 		84DB37C227B5A5FE0028F6CA /* ContainerViewController */ = {
@@ -409,8 +421,8 @@
 				8413A45927A59E0F00520CA4 /* Assets.xcassets in Resources */,
 				84F4BA7127AADB51009A58A5 /* Roboto-Bold.ttf in Resources */,
 				8469CC8C27A7C89D00F3CA54 /* Roboto-Regular.ttf in Resources */,
-				848E06DB27B28FB500237CC2 /* CalendarCollectionViewCell.xib in Resources */,
-				8448525427BEAFF50069C61C /* TaskTableViewCell.xib in Resources */,
+				8448525427BEAFF50069C61C /* TaskListTableViewCell.xib in Resources */,
+				8467A8B127F85C0A00AC25BA /* TaskTableViewCell.xib in Resources */,
 				8413A45727A59E0E00520CA4 /* Main.storyboard in Resources */,
 				848E06D627B26A8000237CC2 /* GoogleService-Info.plist in Resources */,
 			);
@@ -465,41 +477,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8467A8B527F8AF7B00AC25BA /* TaskRouter.swift in Sources */,
 				842324DF27E4C791007A4CDA /* LoginPresenter.swift in Sources */,
 				84310ED927A8464400E972E4 /* LoginViewController.swift in Sources */,
 				8413A45427A59E0E00520CA4 /* SplashViewController.swift in Sources */,
 				84A9543027C6152500E1AFBA /* Sequence+DateGenerator.swift in Sources */,
 				84DB37C427B5A6250028F6CA /* ContainerViewController.swift in Sources */,
 				84F4BA7427AAFB74009A58A5 /* ForgotPasswordViewController.swift in Sources */,
+				8467A8B727FB573400AC25BA /* TaskFactory.swift in Sources */,
 				8448524F27BE93F90069C61C /* ContainerFactory.swift in Sources */,
 				8413A45027A59E0E00520CA4 /* AppDelegate.swift in Sources */,
 				848E310527BAE04100A08014 /* DateModel.swift in Sources */,
-				84E98AB027BFE544003D1C6B /* TaskPresenter.swift in Sources */,
+				84E98AB027BFE544003D1C6B /* TaskListPresenter.swift in Sources */,
 				848E310A27BBA05F00A08014 /* Date+Format.swift in Sources */,
 				84D7066527AC34B300D9B874 /* FireBaseAuthManager.swift in Sources */,
 				8448524D27BD56190069C61C /* ProfileRouter.swift in Sources */,
 				848E310327B6B9F800A08014 /* LoginRouter.swift in Sources */,
 				848E310D27BBC7AC00A08014 /* SignUpRouter.swift in Sources */,
-				8437729127C502C600DA3B5A /* AddTaskViewController.swift in Sources */,
+				8437729127C502C600DA3B5A /* AddTaskListViewController.swift in Sources */,
 				848E310127B6B06400A08014 /* AuthFactory.swift in Sources */,
 				842324DD27E4BE69007A4CDA /* SignUpModel.swift in Sources */,
 				848E310727BAE24100A08014 /* FormattedString.swift in Sources */,
-				84D7066A27AC4E3E00D9B874 /* TaskViewController.swift in Sources */,
+				84D7066A27AC4E3E00D9B874 /* TaskListViewController.swift in Sources */,
 				84ED1F5F27AD52B9003D83B0 /* ProfileViewController.swift in Sources */,
-				8448525327BEAFF50069C61C /* TaskTableViewCell.swift in Sources */,
+				8448525327BEAFF50069C61C /* TaskListTableViewCell.swift in Sources */,
 				8413A45227A59E0E00520CA4 /* SceneDelegate.swift in Sources */,
 				848E30FE27B6AB9600A08014 /* SplashRouter.swift in Sources */,
-				8437728E27C3A84500DA3B5A /* ListTaskModel.swift in Sources */,
+				8437728E27C3A84500DA3B5A /* TaskListModel.swift in Sources */,
+				8467A8B327F8AE1600AC25BA /* TaskPresenter.swift in Sources */,
 				842324E727EB8877007A4CDA /* ForgotPasswordModel.swift in Sources */,
 				842324E127E4CCE0007A4CDA /* LoginModel.swift in Sources */,
-				848E06DA27B28FB500237CC2 /* CalendarCollectionViewCell.swift in Sources */,
 				8448524B27BD52AB0069C61C /* ForgotPasswordRouter.swift in Sources */,
 				84ED1F6227AD5915003D83B0 /* UserModel.swift in Sources */,
 				844BF43727B544FD004CEC6C /* KyesForUserDefaults.swift in Sources */,
-				842324DB27E4B200007A4CDA /* DetailViewController.swift in Sources */,
+				8467A8AB27F854D200AC25BA /* TaskModel.swift in Sources */,
+				842324DB27E4B200007A4CDA /* TaskViewController.swift in Sources */,
 				842324E527EB886B007A4CDA /* ForgotPasswordPresenter.swift in Sources */,
 				84B2038827E10F1B00831799 /* SignUpPresenter.swift in Sources */,
 				842324E327E4D463007A4CDA /* UserDefaultManager.swift in Sources */,
+				8467A8B027F85C0A00AC25BA /* TaskTableViewCell.swift in Sources */,
 				84310EDB27A8467800E972E4 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  AddTaskViewController.swift
+//  AddTaskListViewController.swift
 //  Listok
 //
 //  Created by Мария Манжос on 22.02.22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddTaskViewController: UIViewController {
+class AddTaskListViewController: UIViewController {
 
     //MARK: - property
     private lazy var addTaskLabel = createAddTaskLabel()
@@ -30,10 +30,8 @@ class AddTaskViewController: UIViewController {
     private lazy var descriptionTextField = createInputTextfield(placeholder: "Input description of new task")
     private lazy var descriptionSeparatorLine = createSeparatorLine()
     private lazy var addButton = createAddButton()
-
-   // weak var delegate: TaskViewControllerDelegate?
     
-    var closure: ((ListTaskModel) -> ())?
+    var closure: ((TaskListModel) -> ())?
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -53,18 +51,17 @@ class AddTaskViewController: UIViewController {
         guard let title = inputTitleTextfield.text else {return}
         let beginTime = inputBeginTime.date.getFormettedDateString(format: "HH:mm")
         let endTime = inputBeginTime.date.getFormettedDateString(format: "HH:mm")
-        let task = ListTaskModel(title: title, time: "\(beginTime) - \(endTime)")
+        let task = TaskListModel(title: title, time: "\(beginTime) - \(endTime)")
         
         closure?(task)
         
-//        delegate?.addTask(task: task)
         dismiss(animated: true, completion: nil)
     }
     
 }
 
 //MARK: - prepare UI
-private extension AddTaskViewController {
+private extension AddTaskListViewController {
     func prepareUI () {
         view.backgroundColor = .white
         view.addSubview(addTaskLabel)

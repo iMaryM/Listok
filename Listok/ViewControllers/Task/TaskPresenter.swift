@@ -2,48 +2,52 @@
 //  TaskPresenter.swift
 //  Listok
 //
-//  Created by Мария Манжос on 18.02.22.
+//  Created by Мария Манжос on 2.04.22.
 //
 
 import Foundation
 
 protocol TaskPresenterProtocol {
-    init(vc: TaskViewControllerProtocol)
-    func getTasks() -> [ListTaskModel]
-    func getDates() -> [DateModel]
-    func addTask(task: ListTaskModel)
-    func deleteTask(taskIndex: Int)
+    func goToTaskList()
+    func getTasks() -> [TaskModel]
+    func setTasks(tasks: [TaskModel])
+    func addTask(task: TaskModel)
+    func updateTask(task: TaskModel, taskIndex: Int)
 }
 
 class TaskPresenter: TaskPresenterProtocol {
     
-    private weak var vc: TaskViewControllerProtocol?
-    private var tasks: [ListTaskModel] = []
-    private var calendarDates = [DateModel]()
+    weak var vc: TaskViewController?
+    private let router: TaskRouter
+    private var tasks: [TaskModel] = []
+    
+    init(router: TaskRouter) {
+        self.router = router
+    }
+    
+    func goToTaskList() {
+        guard let vc = vc else {
+            return
+        }
 
-    required init(vc: TaskViewControllerProtocol) {
-        self.vc = vc
+        router.perform(to: .goToTaskList, viewController: vc)
     }
     
-    func getTasks() -> [ListTaskModel] {
-        return tasks
+    func getTasks() -> [TaskModel] {
+        return self.tasks
     }
     
-    func getDates() -> [DateModel] {
-        return calendarDates.generateDates()
+    func setTasks(tasks: [TaskModel]) {
+        self.tasks = tasks
     }
     
-    func addTask(task: ListTaskModel) {
+    func addTask(task: TaskModel) {
         tasks.append(task)
-        vc?.updateTaskTable()
     }
     
-    func deleteTask(taskIndex: Int) {
-        tasks.remove(at: taskIndex)
+    func updateTask(task: TaskModel, taskIndex: Int) {
+        tasks[taskIndex] = task
         vc?.updateTaskTable()
     }
     
 }
-
-
-
